@@ -1,0 +1,324 @@
+.navbar{
+    background-color: rgb(12, 14, 34);
+    padding: .8em 1em;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    justify-content: center;
+}
+
+.navbar h1{
+    color: white;
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.sub-nav{
+    display: flex;
+    flex-grow: 1;
+    gap: 10px;
+}
+
+.options{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    list-style-type: none;
+    margin-right: 2px;
+}
+
+.options p{
+    color: white;
+    text-decoration: none;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600;
+    margin-right: 1em;
+}
+
+.options p:hover,
+.options p:focus{
+    color: rgb(255, 153, 0);
+}
+
+.dropdown-algo{
+    margin-left: 20px;
+}
+
+
+
+.dropdown-algo p{
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    font-weight: 600;
+    text-align: center;
+    height: 100%;
+    cursor: pointer;
+}
+
+.dropdown-maze{
+    margin-left: 2px;
+}
+
+.dropdown-maze p:hover,
+.dropdown-maze p:focus{
+    color: rgb(255, 153, 0);
+}
+
+.dropdown-algo p:hover,
+.dropdown-algo p:focus{
+    color: rgb(255, 153, 0);
+}
+
+.dropdown-maze p{
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    font-weight: 600;
+    text-align: center;
+    height: 100%;
+    cursor: pointer;
+}
+
+.dropmenu-algo{
+    display: none;
+    position: absolute;
+    background-color: rgb(12, 14, 34);
+    list-style-type: none;
+    top: 72px;
+    padding: 5px 2px;
+    border-radius: 4px;
+}
+
+.opt{
+    cursor: pointer;
+}
+
+.material-symbols-outlined{
+    transition: transform 0.4s linear;
+    font-weight: 600;
+}
+
+
+.dropmenu-algo li,
+.dropmenu-maze li{
+    color: white;
+    font-size: 1rem;
+    font-weight: 600;
+    padding: .7em .7em;
+}
+
+.dropmenu-maze{
+    display: none;
+    position: absolute;
+    background-color: rgb(12, 14, 34);
+    list-style-type: none;
+    top: 72px;
+    padding: 5px 2px;
+    border-radius: 4px;
+}
+
+.btn{
+    background-color: rgb(255, 153, 0);
+    color: white;
+    font-size: 1rem;
+    padding: .6em .8em;
+    font-weight: 600;
+    border-radius: 4px;
+    cursor: pointer;
+    border: none;
+    outline: transparent;
+}
+
+.btn:focus,
+.btn:hover{
+    background-color: rgb(167, 163, 158);
+}
+
+.displayAlgo{
+    display: block !important;
+}
+
+.displayAlgo{
+    display: block !important;
+
+}
+
+.displayMaze{
+    display: block !important;
+}
+
+.rotate{
+    transform: rotate(180deg);
+    transition: transform 0.3s linear;
+}
+
+
+
+
+@media screen and (max-width: 733px) {
+    .dropmenu-algo{
+        top: 88px;
+    }
+
+    .dropmenu-maze{
+        top: 88px;
+    }
+}
+
+@media screen and (max-width: 695px) {
+   .sub-nav{
+    flex-wrap: wrap;
+   }
+
+   .options{
+    margin-left: 0 !important;
+   }
+
+   .dropmenu-algo{
+    top: 81px;
+   }
+
+  .dropmenu-maze{
+    top: 81px;
+   }
+}
+
+
+
+.secondary-nav{
+    padding: 1.2em 1em;
+    flex-wrap: wrap;
+    display: flex;
+    gap: 5px;
+    justify-content: space-around;
+}
+
+.secondary-nav div{
+    display: flex;
+    gap: 3px;
+    align-items: center;
+    justify-content: center;
+}
+
+.secondary-nav div p{
+    font-size: 1.2rem;
+}
+
+.secondary-nav div span{
+    font-size: 1.6rem !important;
+    font-weight: 400 !important;
+}
+
+.node{
+    width: 1.6em;
+    height: 1.6em;
+}
+
+.banner{
+    font-size: 1.4rem;
+    text-align: center;
+    padding: .8em 0;
+    color: rgb(1, 37, 53);
+}
+
+@media screen and (max-width: 866px) {
+    .secondary-nav{
+        gap: 5px;
+    }
+    .secondary-nav div p {
+        font-size: .9rem;
+    }
+    .secondary-nav div span{
+        font-size: 1rem !important;
+    }
+}
+
+.grid{
+    display: grid;
+    font-size: 1rem !important;
+    grid-template-columns: repeat(70, 1fr);
+    grid-template-rows: repeat(28, 1fr);
+    grid-gap: 1px; 
+    border: 1px solid rgba(0, 110, 255, 0.418);
+    background-color: rgba(0, 110, 255, 0.418);
+    margin: 0px 2px;
+}
+
+.cut{
+    color: rgb(207, 13, 13);
+}
+
+.dash{
+    text-decoration: line-through;
+}
+
+
+
+@media screen and (max-width: 1440px) {
+    .dropmenu-algo{
+        top: 62px;
+    }
+
+    .dropmenu-maze{
+        top: 62px;
+    }
+
+    .grid{
+        grid-template-columns: repeat(56, 1fr);
+        grid-template-rows: repeat(35, 1fr);
+    }
+}
+
+@media screen and (max-width: 1025px) {
+    .navbar{
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+    }
+
+    .grid{
+        grid-template-columns: repeat(35, 1fr);
+        grid-template-rows: repeat(56, 1fr);
+    }
+
+    .dropdown-algo{
+        margin-left: 0;
+    }
+
+    .dropmenu-algo{
+        top: 95px;
+    }
+
+    .dropmenu-maze{
+        top: 95px;
+    }
+}
+
+@media screen and (max-width: 695px) {
+    .sub-nav{
+     flex-wrap: wrap;
+    }
+ 
+    .options{
+     margin-left: 0 !important;
+    }
+ 
+    .dropmenu-algo{
+     top: 81px;
+    }
+ 
+    .grid{
+        grid-template-columns: repeat(20, 1fr);
+        grid-template-rows: repeat(98, 1fr);
+    }
+
+   .dropmenu-maze{
+     top: 81px;
+    }
+ }
