@@ -40,10 +40,10 @@
   <div><span class="material-symbols-outlined">nest_heat_link_e</span> <p>Target Node</p></div>
   <div [ngClass]="{cut:!isWeight}"><span class="material-symbols-outlined">weight</span> <p [ngClass]="{dash:!isWeight}">Weighted Node</p></div>
   <div><span class="material-symbols-outlined">circle</span> <p>Bomb Node</p></div>
-  <div><div class="node" style="border: 1px solid rgb(0, 174, 255)"></div> <p>Unvisited Node</p></div>
-  <div><div class="node" style="background-color: black;"></div> <p>Wall Node</p></div>
-  <div><div class="node" style="background-color: rgb(212, 0, 255)"></div><div class="node" style="background-color: rgb(0, 174, 255)"></div> <p>Visited Node</p></div>
-  <div><div class="node" style="background-color: rgb(245, 192, 48);"></div> <p>Path Node</p></div>
+  <div><div class="node-p" style="border: 1px solid rgb(0, 174, 255)"></div> <p>Unvisited Node</p></div>
+  <div><div class="node-p" style="background-color: black;"></div> <p>Wall Node</p></div>
+  <div><div class="node-p" style="background-color: rgb(212, 0, 255)"></div><div class="node-p" style="background-color: rgb(0, 174, 255)"></div> <p>Visited Node</p></div>
+  <div><div class="node-p" style="background-color: rgb(245, 192, 48);"></div> <p>Path Node</p></div>
 </div>
 
 <div [ngSwitch]="selectedAlgo">
@@ -56,6 +56,7 @@
 
 <div>
   <div class="grid" id="grid">
-    <app-node style="font-size: 1rem;" #Appnode appMouseActivites *appFillMaze="row; col:col; let i = appFillMazeId; let c = appFillMazeCount" [attr.rc]="i" [id]="i" [isWeight]="isWeight" [attr.count]="c" [attr.weight]="1"></app-node>
+    <app-node (dragover)="allaowImageDrop($event)" (drop)="imageDrop($event)" #Appnode appMouseActivites *appFillMaze="row; col:col; let i = appFillMazeId; let c = appFillMazeCount" [attr.rc]="i" [id]="i" [isWeight]="isWeight" [isWall]="isWall" [attr.count]="c" [attr.weight]="1"></app-node>
   </div>
 </div>
+

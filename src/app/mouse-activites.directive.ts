@@ -6,6 +6,7 @@ import { Directive, ElementRef, HostListener, Input, Renderer2 } from '@angular/
 export class MouseActivitesDirective {
 
   @Input() isWeight:any;
+  @Input() isWall:any;
 
   constructor(private element:ElementRef, private renderer: Renderer2) { 
     this.renderer.setStyle(this.element.nativeElement,'cursor','pointer')
@@ -13,9 +14,12 @@ export class MouseActivitesDirective {
 
   @HostListener('dragover') createWall(){
     var ele = this.element.nativeElement.firstChild;
-    if(!ele.hasChildNodes()){
-      ele.classList.add('wall');
+    if(this.isWall){
+      if(!ele.hasChildNodes()){
+        ele.classList.add('wall');
+      }
     }
+
     
   }
 

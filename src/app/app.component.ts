@@ -19,8 +19,10 @@ export class AppComponent implements AfterViewInit, OnInit {
 
   algo:boolean = false;
   maze:boolean = false;
+  dragged:any;
 
   isWeight:boolean = true;
+  isWall:boolean = true;
 
   get isWeg():any{
     return this.isWeight
@@ -56,11 +58,6 @@ export class AppComponent implements AfterViewInit, OnInit {
   }
 
   graph:any = {};
-
-
-
-
- 
 
  
   @ViewChild('Appnode') nodes!:QueryList<ElementRef>;
@@ -116,9 +113,22 @@ export class AppComponent implements AfterViewInit, OnInit {
       img.classList.add('icon')
       img.innerHTML = 'emergency';
       img.draggable = true
+      img.id = 'start';
 
-      img.setAttribute("ondragstart", "imageDragStart(event)");
-      img.setAttribute("ondrag","Imagedragging(event,this.id)");
+
+
+      img.addEventListener("dragstart",(event) => {
+        console.log("Hello");
+        this.isWall = false;
+        this.dragged = event!.target!;
+      });
+
+
+      img.addEventListener("drag",(event)=> {
+        console.log("Dragging");
+        
+      });
+
       document.getElementById(this.start)!.setAttribute('weight','0');
 
       startNode!.appendChild(img)
@@ -128,9 +138,51 @@ export class AppComponent implements AfterViewInit, OnInit {
       img.innerHTML = 'nest_heat_link_e';
       img.classList.add('icon')
       img.draggable = true
+
+      img.addEventListener("dragstart",(event) => {
+        console.log("Hello");
+        this.isWall = false;
+        this.dragged = event!.target!;
+      });
+
+
+      img.addEventListener("drag",(event)=> {
+        console.log("Dragging");
+        
+      });
+      
+      img.id = 'goal';
       targetNode!.appendChild(img);
 
 
   }
+
+
+  allaowImageDrop(event:any):any{
+      event.preventDefault();
+  }
+
+  imageDrop(event:any):any{
+    event.preventDefault();
+    console.log(this.dragged);
+    console.log(event.target);
+    
+    
+    var data = this.dragged;
+    event.target.appendChild(data);
+    data.style.display="block";
+    this.isWall = true;
+    
+
+    if(data.id == "start"){
+        this.start = event.target.parentElement.id;
+    }
+
+    if(data.id == "goal"){
+        this.end = event.target.parentElement.id;;
+    }
+  }
 }
+
+
 

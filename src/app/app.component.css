@@ -195,8 +195,8 @@
     padding: 1.2em 1em;
     flex-wrap: wrap;
     display: flex;
-    gap: 5px;
-    justify-content: space-around;
+    gap: 1em;
+    justify-content: flex-start;
 }
 
 .secondary-nav div{
@@ -211,13 +211,13 @@
 }
 
 .secondary-nav div span{
-    font-size: 1.6rem !important;
+    font-size: 1.2rem !important;
     font-weight: 400 !important;
 }
 
-.node{
-    width: 1.6em;
-    height: 1.6em;
+.node-p{
+    width: 1.2rem;
+    height: 1.2rem;
 }
 
 .banner{
