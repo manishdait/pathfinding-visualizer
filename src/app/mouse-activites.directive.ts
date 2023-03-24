@@ -12,9 +12,9 @@ export class MouseActivitesDirective {
     this.renderer.setStyle(this.element.nativeElement,'cursor','pointer')
   }
 
-  @HostListener('dragover') createWall(){
+  @HostListener('mouseover',['$event'])createWall(event: MouseEvent){
     var ele = this.element.nativeElement.firstChild;
-    if(this.isWall){
+    if(this.isWall && event.altKey){
       if(!ele.hasChildNodes()){
         ele.classList.add('wall');
       }
@@ -32,8 +32,10 @@ export class MouseActivitesDirective {
     }
 
     if(ele.hasChildNodes()){
-      this.element.nativeElement.setAttribute('weight','1');
-      ele.removeChild(ele.firstChild);
+      if(ele.firstChild.id != 'start' && ele.firstChild.id != 'goal' && ele.firstChild.id != 'boom'){
+        this.element.nativeElement.setAttribute('weight','1');
+        ele.removeChild(ele.firstChild);
+      }
       return;
     }
 
@@ -42,6 +44,7 @@ export class MouseActivitesDirective {
       img.className = 'material-symbols-outlined'
       img.classList.add('icon')
       img.innerHTML = 'weight'
+      img.classList.add('fill')
       this.element.nativeElement.setAttribute('weight','15');
       ele.appendChild(img);
       console.log(this.isWeight)
@@ -50,3 +53,4 @@ export class MouseActivitesDirective {
   }
 
 }
+

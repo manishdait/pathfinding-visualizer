@@ -1,27 +1,47 @@
-# PathFindingVisualizer
+<img src="src/assets/images/banner.png"> 
 
+# PathFinding Visualizer
+
+This is a simple Angular project which help to visualize various Pathfinding Algorithms.
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.0.4.
 
-## Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Algorithm you can visualize
 
-## Code scaffolding
+- Breath-first Search (unweighted): a great algorithm; guarantees the shortest path.
+- Depth-first Search (unweighted): a very bad algorithm for pathfinding; does not guarantee the shortest path.
+- Dijistras Algorithm (weighted): the father of pathfinding algorithms; guarantees the shortest path.
+- More to be added.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Building from source
 
-## Build
+Clone this repository and run
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+```
+npm install
+```
+```
+ng build
+```
 
-## Running unit tests
+The build will result in a single `index.html` and other `.js`  file that is made available in the `docs` directory.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
-## Running end-to-end tests
+## Running the application
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+```
+ng serve --open
+```
 
-## Further help
+Navigate to http://localhost:4200 to access the application.
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+### Deploy Project <br/>
+
+[Check out the deploy website here](https://manishdait.github.io/Pathfinding-Visualizer/)
+
+<img src="src/assets/images/img1.png"> <br/>
+<img src="src/assets/images/img2.png"> <br/>
+<img src="src/assets/images/img3.png"> <br/>
+
+### Demo
+<img src="src/assets/images/search.gif"> <br/>

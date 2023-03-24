@@ -1,3 +1,130 @@
+<div class="pop-up" [ngSwitch] = 'page' id="popup">
+  <div class="card" *ngSwitchCase = '1'>
+    <h1>Welcome to PathFinding Visualizer</h1>
+    <div class="center-div">
+      <p class="subhead">This is a tutuorial which will help to understand feature of these application.</p>
+    <p>If you want to dive right in, feel free to press the "Skip Tutorial" button below. Otherwise, press "Next"!</p>
+    <div class="img-container"><img src="../assets/images/Icon.png"></div>
+    </div>
+    <div class="btn-container">
+      <button class="btn" (click)="skip()">Skip</button>
+      <div style="display: flex; gap: 10px;">
+        <button class="btn" (click)="previous()">Previous</button>
+        <button class="btn" (click)="next()">Next</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" *ngSwitchCase = '2'>
+    <h1>What is PathFinding Visualizer?</h1>
+    <div class="center-div">
+      <p class="subhead">A pathfinding algorithm seeks to find the shortest path between two points. This application currently visualizes three pathfinding algorithms in action, and more to come!</p>
+    <p>All of the algorithms on this application are adapted for a 2D grid, where movements from a node to another have a "cost" of 1.</p>
+    <div class="img-container"><img src="../assets/images/Graph.png"></div>
+   
+    </div>-
+     <div class="btn-container">
+      <button class="btn" (click)="skip()">Skip</button>
+      <div style="display: flex; gap: 10px;">
+        <button class="btn" (click)="previous()">Previous</button>
+        <button class="btn" (click)="next()">Next</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" *ngSwitchCase = '3'>
+    <h1>Picking an algorithm</h1>
+    <div class="center-div">
+    <p class="subhead">Choose an algorithm from the "Algorithms" drop-down menu.</p>
+      <p>Note that some algorithms are unweighted, while others are weighted. Unweighted algorithms do not weight nodes into account, whereas weighted ones do. Additionally, not all algorithms guarantee the shortest path.</p>
+    <div class="img-container"><img src="../assets/images/Menu.png"></div>
+    </div>
+    
+    <div class="btn-container">
+      <button class="btn" (click)="skip()">Skip</button>
+      <div style="display: flex; gap: 10px;">
+        <button class="btn" (click)="previous()">Previous</button>
+        <button class="btn" (click)="next()">Next</button>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="card" *ngSwitchCase = '4'>
+    <h1>Meet the algorithms</h1>
+    <div class="center-div">
+      <p class="subhead">Not all algorithms are created equal.</p>
+    <div class="img-container">
+    <p><strong>Breath-first Search</strong> (unweighted): a great algorithm; guarantees the shortest path</p>
+    <p><strong>Depth-first Search</strong>  (unweighted): a very bad algorithm for pathfinding; does not guarantee the shortest path</p>
+    <p><strong>Dijkstra's Algorithm</strong>  (weighted): the father of pathfinding algorithms; guarantees the shortest path</p>
+    </div>
+    </div>
+    
+    <div class="btn-container">
+      <button class="btn" (click)="skip()">Skip</button>
+      <div style="display: flex; gap: 10px;">
+        <button class="btn" (click)="previous()">Previous</button>
+        <button class="btn" (click)="next()">Next</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" *ngSwitchCase = '5'>
+    <h1>Adding walls and weights</h1>
+    <div class="center-div">
+      <p class="subhead">Click on the grid to add a weight. Move mouse on the grid while pressing Alt to add a wall. Generate mazes and patterns from the "Mazes & Patterns" drop-down menu.</p>
+    <p>Walls are impenetrable, meaning that a path cannot cross through them. Weights, however, are not impassable. They are simply more "costly" to move through. In this application, moving through a weight node has a "cost" of 15.</p>
+    <div class="img-container">
+      <img src="../assets/images/Wall.png">
+    </div>
+    </div>
+    <div class="btn-container">
+      <button class="btn" (click)="skip()">Skip</button>
+      <div style="display: flex; gap: 10px;">
+        <button class="btn" (click)="previous()">Previous</button>
+        <button class="btn" (click)="next()">Next</button>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="card" *ngSwitchCase = '6'>
+    <h1>Adding a bomb</h1>
+    <div class="center-div">
+      <p class="subhead">Click the "Add Bomb" button.</p>
+      <p>Adding a bomb will change the course of the chosen algorithm. In other words, the algorithm will first look for the bomb (in an effort to diffuse it) and will then look for the target node.</p>
+      <div class="img-container">
+        <img src="../assets/images/Boom.png">
+      </div>
+    </div>
+   <div class="btn-container">
+      <button class="btn" (click)="skip()">Skip</button>
+      <div style="display: flex; gap: 10px;">
+        <button class="btn" (click)="previous()">Previous</button>
+        <button class="btn" (click)="next()">Next</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" *ngSwitchCase = '7'>
+    <h1>Enjoy!</h1>
+    <div class="center-div">
+      <p class="subhead">I hope you have just as much fun playing around with this visualization tool as I had building it!</p>
+      <p>For Better experience use Laptop or PC.</p>
+      <p>If you want to see the source code for this application, check out my github.</p>
+    </div>
+    <div class="btn-container">
+      <button class="btn" (click)="skip()">Skip</button>
+      <div style="display: flex; gap: 10px;">
+        <button class="btn" (click)="previous()">Previous</button>
+        <button class="btn" (click)="next()">Next</button>
+      </div>
+    </div>
+  </div>
+
+</div>
+
 <div class="navbar">
   <h1>{{ title }}</h1>
 
@@ -14,23 +141,22 @@
     <div class="dropdown-maze">
       <p (click)="toggleMaze()">Mazes <span class="material-symbols-outlined" id="al"  [ngClass]="maze? 'rotate': 'none'">expand_more</span></p>
         <ul class="dropmenu-maze" id="maze"  [ngClass]="maze? 'displayMaze': 'none'">
-          <li class="opt">Random Maze</li>
-          <li class="opt">Recurssive Division</li>
-          <li class="opt">Weighted Maze</li>
+          <li class="opt" (click)="toggleMaze(); generateWallMaze()">Random Maze</li>
+          <li class="opt" [ngClass]="{dash:!isWeight}" (click)="toggleMaze(); generateWeightMaze()">Weighted Maze</li>
         </ul>
     </div>
 
     <div class="options"  style="margin-left: 10px;">
-      <p class="links">Add Boom</p>
+      <button class="links" (click)="addBoom()" [disabled]="disAble">{{boomAdded? 'Remove Boom': 'Add Boom'}}</button>
     </div>
 
-    <button class="btn" (click)="visualize()">{{ selectedAlgo? 'Visualize!': 'Pick an Algorithm' }}</button>
+    <button class="btn" (click)="visualize()" [disabled]="disAble">Visualize!</button>
    
 
     <div class="options" style="margin-left: auto;">
-      <p class="links">Clear Wall</p>
-      <p class="links">Clear Path</p>
-      <p class="links">Clear Board</p>
+      <button class="links" (click)="clearWall()" [disabled]="disAble">Clear Wall & Weights</button>
+      <button class="links" (click)="clearPath()" [disabled]="disAble">Clear Path</button>
+      <button class="links" (click)="clearBoard()" [disabled]="disAble">Clear Board</button>
     </div>
   </div>
 </div>
@@ -38,7 +164,7 @@
 <div class="secondary-nav">
   <div><span class="material-symbols-outlined">emergency</span> <p>Source Node</p></div>
   <div><span class="material-symbols-outlined">nest_heat_link_e</span> <p>Target Node</p></div>
-  <div [ngClass]="{cut:!isWeight}"><span class="material-symbols-outlined">weight</span> <p [ngClass]="{dash:!isWeight}">Weighted Node</p></div>
+  <div [ngClass]="{cut:!isWeight}"><span class="material-symbols-outlined fill">weight</span> <p [ngClass]="{dash:!isWeight}">Weighted Node</p></div>
   <div><span class="material-symbols-outlined">circle</span> <p>Bomb Node</p></div>
   <div><div class="node-p" style="border: 1px solid rgb(0, 174, 255)"></div> <p>Unvisited Node</p></div>
   <div><div class="node-p" style="background-color: black;"></div> <p>Wall Node</p></div>
@@ -47,16 +173,16 @@
 </div>
 
 <div [ngSwitch]="selectedAlgo">
-  <p *ngSwitchDefault class="banner">Pick an <strong>Algorithm</strong> to Visualize!</p>
-  <p *ngSwitchCase="'Breath First Search'" class="banner">BFS <strong>Breath First Search</strong> Algorithm</p>
-  <p *ngSwitchCase="'Depth First Search'" class="banner">DFS <strong>Depth First Search</strong> Algorithm</p>
-  <p *ngSwitchCase="'Dijktras'" class="banner">Dijktras <strong>guarenties shotest path</strong> Algorithm</p>
+  <p *ngSwitchDefault class="banner">Pick an <strong><em>Algorithm</em></strong> to Visualize!</p>
+  <p *ngSwitchCase="'Breath First Search'" class="banner">Breath-First Search is <strong><em>unweighted</em></strong> and <strong><em>guarantees</em></strong> shortest path.</p>
+  <p *ngSwitchCase="'Depth First Search'" class="banner">Depth-First Search is <strong><em>unweighted</em></strong> and <strong><em>desn't guarantees</em></strong> shortest path!</p>
+  <p *ngSwitchCase="'Dijktras'" class="banner">Dijktras is <strong><em>weighted</em></strong> and <strong><em>guarantees</em></strong> shortest path.</p>
 </div>
 
 
 <div>
   <div class="grid" id="grid">
-    <app-node (dragover)="allaowImageDrop($event)" (drop)="imageDrop($event)" #Appnode appMouseActivites *appFillMaze="row; col:col; let i = appFillMazeId; let c = appFillMazeCount" [attr.rc]="i" [id]="i" [isWeight]="isWeight" [isWall]="isWall" [attr.count]="c" [attr.weight]="1"></app-node>
+    <app-node class="node-con"  (dragover)="allaowImageDrop($event)" (drop)="imageDrop($event)" #Appnode appMouseActivites *appFillMaze="row; col:col; let i = appFillMazeId; let c = appFillMazeCount" [attr.rc]="i" [id]="i" [isWeight]="isWeight" [isWall]="isWall" [attr.count]="c" [attr.weight]="1"></app-node>
   </div>
 </div>
 
