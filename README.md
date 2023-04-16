@@ -1,47 +1,64 @@
+# Pathfinding Visualizer
+
 <img src="src/assets/images/banner.png"> 
 
-# PathFinding Visualizer
+`Pathfinding Visualizer` is an Angular application that allows users to visualize various pathfinding algorithms in action.
 
-This is a simple Angular project which help to visualize various Pathfinding Algorithms.
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.0.4.
+## Getting Started
 
+### Prerequisites
 
-## Algorithm you can visualize
+In order to use `Pathfinding Visualizer`, you will need to have the following installed on your machine:
 
-- Breath-first Search (unweighted): a great algorithm; guarantees the shortest path.
-- Depth-first Search (unweighted): a very bad algorithm for pathfinding; does not guarantee the shortest path.
-- Dijistras Algorithm (weighted): the father of pathfinding algorithms; guarantees the shortest path.
-- More to be added.
+- `Node.js` and `npm`
+- `Angular CLI`
 
-## Building from source
+### Installation
 
-Clone this repository and run
+To install `Pathfinding Visualizer`, you can follow these steps:
+
+1. Clone the repository:
+
+```
+https://github.com/ManishDait/Pathfinding-Visualizer.git
+```
+
+Alternatively, you can download the source code as a ZIP file and extract it to a directory of your choice.
+
+2. Navigate to the project directory and install the dependencies:
+
+```
+cd Pathfinding-Visualizer
+```
 
 ```
 npm install
 ```
-```
-ng build
-```
 
-The build will result in a single `index.html` and other `.js`  file that is made available in the `docs` directory.
+### Usage
 
-
-## Running the application
+To run `Pathfinding Visualizer`, you can use the following command:
 
 ```
-ng serve --open
+ng server
 ```
 
-Navigate to http://localhost:4200 to access the application.
+Then, open your browser and navigate to `http://localhost:4200/`.
 
-### Deploy Project <br/>
+## Features
+
+`Pathfinding Visualizer` provides the following features:
+
+- Visualizes various pathfinding algorithms, including `Dijkstra's algorithm`, `Breadth First Search` and `Depth First Search`.
+- Allows users to draw obstacles and set the start and end points on a grid
+- Highlights the cells of the grid being visited during the search process, making it easy to understand how each algorithm works
+
+## Demo
+
+![Pathfinding Visualizer Demo](src/assets/images/search.gif)
 
 [Check out the deploy website here](https://manishdait.github.io/Pathfinding-Visualizer/)
 
-<img src="src/assets/images/img1.png"> <br/>
-<img src="src/assets/images/img2.png"> <br/>
-<img src="src/assets/images/img3.png"> <br/>
+## License
 
-### Demo
-<img src="src/assets/images/search.gif"> <br/>
+`Pathfinding Visualizer` is licensed under the `MIT License`. See the `LICENSE` file for more information.
