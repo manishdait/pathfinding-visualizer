@@ -1,6 +1,6 @@
 # Pathfinding Visualizer
 
-<img src="src/assets/images/banner.png"> 
+![Logo](src/assets/images/banner.png) 
 
 `Pathfinding Visualizer` is an Angular application that allows users to visualize various pathfinding algorithms in action.
 
