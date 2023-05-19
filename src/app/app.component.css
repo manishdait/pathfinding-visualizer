@@ -23,11 +23,11 @@
 }
 
 .img-container img{
-    width: 14em;
+    width: 13em;
 }
 
 .subhead{
-    font-size: 1.4em !important;
+    font-size: 1.1em !important;
 }
 
 .btn-container{
@@ -64,20 +64,21 @@
 .card h1{
     text-align: center;
     margin: 0.5em 0px;
+    font-size: 1.4em;
     color: rgb(12, 14, 34);
 }
 .card p{
     text-align: center;
     color: rgb(12, 14, 34);
     margin: 0.5em 0px;
-    font-size: 1rem;
+    font-size: 0.8em;
 }
 
 
 
 .navbar{
     background-color: rgb(12, 14, 34);
-    padding: .8em 1em;
+    padding: .9em 1em;
     display: flex;
     align-items: center;
     gap: 10px;
