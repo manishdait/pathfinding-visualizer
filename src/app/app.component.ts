@@ -246,7 +246,7 @@ addBoom(){
   }
 
   clearBoard(){
-    window.location.href = '/'
+    window.location.href = 'https://manishdait.github.io/Pathfinding-Visualizer/'
   }
 
   clearWall(){
