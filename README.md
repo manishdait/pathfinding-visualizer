@@ -20,7 +20,7 @@ To install `Pathfinding Visualizer`, you can follow these steps:
 1. Clone the repository:
 
 ```
-git clone https://github.com/ManishDait/Pathfinding-Visualizer.git
+git clone https://github.com/ManishDait/pathfinding-visualizer.git
 ```
 
 Alternatively, you can download the source code as a ZIP file and extract it to a directory of your choice.
@@ -57,7 +57,7 @@ Then, open your browser and navigate to `http://localhost:4200/`.
 
 ![Pathfinding Visualizer Demo](src/assets/images/action.gif)
 
-[Check out the deploy website here](https://manishdait.github.io/Pathfinding-Visualizer/)
+[Check out the deploy website here](https://manishdait.github.io/pathfinding-visualizer/)
 
 ## License
 
