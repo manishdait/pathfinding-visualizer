@@ -11,8 +11,6 @@ export class Grid{
                 var leftEle = document.getElementById(`[${i},${j-1}]`);
                 var bottomEle = document.getElementById(`[${i+1},${j}]`);
     
-                
-    
                 if(topEle != null){
                     neighbor.push(`[${i-1},${j}]`);
                 }
