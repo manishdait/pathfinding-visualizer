@@ -160,11 +160,17 @@ export class AppComponent implements AfterViewInit, OnInit {
       img.id = 'start';
 
       img.addEventListener("dragstart",(event) => {
+        if(this.disAble){
+          return;
+        }
         this.isWall = false;
         this.dragged = event!.target!;
       });
 
       img.addEventListener("drag",(event)=> {
+        if(this.disAble){
+          return;
+        }
         //On dragging.
       });
 
@@ -179,12 +185,18 @@ export class AppComponent implements AfterViewInit, OnInit {
       img.draggable = true
 
       img.addEventListener("dragstart",(event) => {
+        if(this.disAble){
+          return;
+        }
         this.isWall = false;
         this.dragged = event!.target!;
       });
 
 
       img.addEventListener("drag",(event)=> {
+        if(this.disAble){
+          return;
+        }
         //On dragging.
       });
       
@@ -193,10 +205,16 @@ export class AppComponent implements AfterViewInit, OnInit {
   }
 
   allaowImageDrop(event: any): any {
+    if(this.disAble){
+      return;
+    }
     event.preventDefault();
   }
 
   imageDrop(event: any): any {
+    if(this.disAble){
+      return;
+    }
     event.preventDefault();
     
     var data = this.dragged;
