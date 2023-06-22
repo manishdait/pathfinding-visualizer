@@ -1,4 +1,4 @@
-import { wait } from "./Timmer";
+import { wait } from "../helper/Timmer";
 
 export class DFS{
 
@@ -26,6 +26,7 @@ export class DFS{
              
             visited.push(node)
             if(node === goal){
+                // Sucess
                 this.solve(goal,prev, this.path)
                 this.draw_path()
                 return;
@@ -101,6 +102,7 @@ export class DFS{
              
             visited.push(node)
             if(node === boom){
+                // Sucess
                 this.solve(boom,prev, this.path_b)
                 this.search(graph,boom,goal)
                 return;

@@ -1,9 +1,9 @@
 import { Component, AfterViewInit, OnInit } from '@angular/core';
-import { Dijktars } from 'src/assets/Algorithms/Dijktars';
-import { Maze } from 'src/assets/Algorithms/Maze';
-import { Grid } from 'src/assets/Grid';
-import { BFS } from '../assets/Algorithms/BFS';
-import { DFS } from '../assets/Algorithms/DFS';
+import { Dijktars } from 'src/assets/algorithms/Dijktars';
+import { Maze } from 'src/assets/algorithms/Maze';
+import { Grid } from 'src/assets/helper/Grid';
+import { BFS } from '../assets/algorithms/BFS';
+import { DFS } from '../assets/algorithms/DFS';
 
 @Component({
   selector: 'app-root',
@@ -11,130 +11,116 @@ import { DFS } from '../assets/Algorithms/DFS';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements AfterViewInit, OnInit {
+  title: string = 'PathFindingVisualizer';
+  page: number  = 1;
 
-  title = 'PathFindingVisualizer';
-  page  = 1;
+  disAble: boolean = false;
 
-  disAble:boolean = false;
+  window_width: any = window.innerWidth;
+  selectedAlgo: string = 'Algorithm';
+  source: string = 'keyboard_arrow_right';
 
-  window_width:any = window.innerWidth;
-  selectedAlgo:string = 'Algorithm'
-  source:string = 'keyboard_arrow_right'
+  algo: boolean = false;
+  maze: boolean = false;
+  dragged: any;
 
-  algo:boolean = false;
-  maze:boolean = false;
-  dragged:any;
+  isWeight: boolean = false;
+  isWall: boolean = true;
 
-  isWeight:boolean = false;
-  isWall:boolean = true;
-
-  get isWeg():any{
-    return this.isWeight
+  get isWeg(): any {
+    return this.isWeight;
   }
 
-  row:number = 28;
-  col:number = 70;
+  row: number = 28;
+  col: number = 70;
 
-  start = '[12,12]'
-  end = '[12,58]'
+  start: string = '[12,12]';
+  end: string = '[12,58]';
+  boom: string = '[12,35]';
+ 
+  boomAdded: boolean = false; 
 
-  boom = '[12,35]'
-
-  boomAdded = false; 
-
-  ngOnInit() {
-    if(this.window_width <= 1440 && this.window_width > 1025){
+  ngOnInit(): void {
+    if(this.window_width <= 1440 && this.window_width > 1025) {
       this.row = 32;
       this.col = 56;
 
-      this.start = '[15,5]'
-      this.end = '[15,51]'
-      this.boom = '[15,28]'
+      this.start = '[15,5]';
+      this.end = '[15,51]';
+      this.boom = '[15,28]';
     }
 
-    if(this.window_width <= 1025 && this.window_width > 695){
+    if(this.window_width <= 1025 && this.window_width > 695) {
       this.row = 35;
       this.col = 35;
 
-      this.start = '[20,5]'
-      this.end = '[20,30]'
-      this.boom = '[20,17]'
+      this.start = '[20,5]';
+      this.end = '[20,30]';
+      this.boom = '[20,17]';
     }
 
-    if(this.window_width <= 695){
+    if(this.window_width <= 695) {
       this.row = 34;
       this.col = 20;
 
-      this.start = '[10,5]'
-      this.end = '[10,15]'
-      this.boom = '[10,10]'
+      this.start = '[10,5]';
+      this.end = '[10,15]';
+      this.boom = '[10,10]';
     }
   }
 
-  graph:any = {};
+  graph: any = {};
 
- 
-  
-
-  toggleAlgo(){
-    if(!this.disAble){
+  toggleAlgo(): void {
+    if(!this.disAble) {
       this.algo = !this.algo;
     }
     
     this.maze = false;
   }
 
-  toggleMaze(){
-    if(!this.disAble){
+  toggleMaze(): void {
+    if(!this.disAble) {
       this.maze = !this.maze;
     }
     
     this.algo = false;
   }
 
-addBoom(){
-  if(this.boomAdded){
-    this.boomAdded = false;
-    document.getElementById('boom')?.remove()
+  addBoom(): void {
+    if(this.boomAdded) {
+      this.boomAdded = false;
+      document.getElementById('boom')?.remove();
+    } else {
+      var node = document.getElementById(this.boom)!.firstChild;
+
+      var img = document.createElement('span');
+      img.className = 'material-symbols-outlined';
+      img.classList.add('icon');
+      img.innerHTML = 'circle';
+      img.draggable = true;
+      img.id = 'boom';
+
+      img.addEventListener("dragstart",(event) => {
+        this.isWall = false;
+        this.dragged = event!.target!;
+      });
+
+      img.addEventListener("drag",(event)=> {
+       // Dragging
+      });
+    
+      node?.appendChild(img);
+      this.boomAdded = true;
+    }
   }
-  else{
-    var node = document.getElementById(this.boom)!.firstChild;
 
-    var img = document.createElement('span');
-    img.className = 'material-symbols-outlined'
-    img.classList.add('icon')
-    img.innerHTML = 'circle';
-    img.draggable = true
-    img.id = 'boom';
-
-    img.addEventListener("dragstart",(event) => {
-      console.log("Hello");
-      this.isWall = false;
-      this.dragged = event!.target!;
-    });
-
-
-    img.addEventListener("drag",(event)=> {
-      console.log("Dragging");
-      
-    });
-
-  
-    node?.appendChild(img)
-    this.boomAdded = true;
-  }
-}
-
-
-
-  
-
-  async visualize(){
-    switch(this.selectedAlgo){
+  async visualize() {
+    switch(this.selectedAlgo) {
       case 'Breath First Search':
         this.disAble = true;
         if(this.boomAdded)
-          await new BFS().search_boom(this.graph,this.start,this.end,this.boom)
+          await new BFS().search_boom(this.graph,this.start,this.end,this.boom);
         else
           await new BFS().search(this.graph,this.start, this.end);
 
@@ -144,7 +130,7 @@ addBoom(){
       case 'Depth First Search':
         this.disAble = true;
         if(this.boomAdded)
-          await new DFS().search_boom(this.graph,this.start,this.end,this.boom)
+          await new DFS().search_boom(this.graph,this.start,this.end,this.boom);
         else
           await new DFS().search(this.graph,this.start, this.end);
           this.disAble = false
@@ -153,7 +139,7 @@ addBoom(){
       case 'Dijktras':
         this.disAble=true
         if(this.boomAdded)
-          await new Dijktars().search_boom(this.graph,this.start,this.end,this.boom)
+          await new Dijktars().search_boom(this.graph,this.start,this.end,this.boom);
         else
           await new Dijktars().search(this.graph,this.start, this.end);
         
@@ -161,30 +147,25 @@ addBoom(){
     }
   }
 
-  ngAfterViewInit(){
+  ngAfterViewInit(): void {
       this.graph = new Grid().mapGrid(this.row,this.col);
       var startNode = document.getElementById(this.start)!.firstChild;
       var targetNode = document.getElementById(this.end)!.firstChild;
 
       var img = document.createElement('span');
       img.className = 'material-symbols-outlined'
-      img.classList.add('icon')
+      img.classList.add('icon');
       img.innerHTML = 'emergency';
       img.draggable = true
       img.id = 'start';
 
-
-
       img.addEventListener("dragstart",(event) => {
-        console.log("Hello");
         this.isWall = false;
         this.dragged = event!.target!;
       });
 
-
       img.addEventListener("drag",(event)=> {
-        console.log("Dragging");
-        
+        //On dragging.
       });
 
       document.getElementById(this.start)!.setAttribute('weight','0');
@@ -194,109 +175,98 @@ addBoom(){
       var img = document.createElement('span');
       img.className = 'material-symbols-outlined'
       img.innerHTML = 'nest_heat_link_e';
-      img.classList.add('icon')
+      img.classList.add('icon');
       img.draggable = true
 
       img.addEventListener("dragstart",(event) => {
-        console.log("Hello");
         this.isWall = false;
         this.dragged = event!.target!;
       });
 
 
       img.addEventListener("drag",(event)=> {
-        console.log("Dragging");
-        
+        //On dragging.
       });
       
       img.id = 'goal';
       targetNode!.appendChild(img);
-
-
   }
 
-
-  allaowImageDrop(event:any):any{
-      event.preventDefault();
-  }
-
-  imageDrop(event:any):any{
+  allaowImageDrop(event: any): any {
     event.preventDefault();
-    console.log(this.dragged);
-    console.log(event.target);
-    
+  }
+
+  imageDrop(event: any): any {
+    event.preventDefault();
     
     var data = this.dragged;
     event.target.appendChild(data);
-    data.style.display="block";
+    data.style.display = 'block';
     this.isWall = true;
     
-
-    if(data.id == "start"){
+    if(data.id == 'start') {
         this.start = event.target.parentElement.id;
     }
 
-    if(data.id == "goal"){
+    if(data.id == 'goal') {
         this.end = event.target.parentElement.id;;
     }
 
-    if(data.id == "boom"){
+    if(data.id == 'boom') {
       this.boom = event.target.parentElement.id;;
-  }
-  }
-
-  clearBoard(){
-    window.location.href = 'https://manishdait.github.io/Pathfinding-Visualizer/'
+    }
   }
 
-  clearWall(){
+  clearBoard(): void {
+    window.location.href = 'https://manishdait.github.io/pathfinding-visualizer/';
+  }
+
+  clearWall(): void {
     var ele = document.getElementsByClassName('node-con');
-    for(var i=0; i<ele.length; i++){
-      ele[i].firstElementChild?.classList.remove('wall')
+    for(var i=0; i<ele.length; i++) {
+      ele[i].firstElementChild?.classList.remove('wall');
       if(ele[i].id != this.start && ele[i].id != this.end && ele[i].id != this.boom){
-        ele[i].firstElementChild?.firstElementChild?.remove()
+        ele[i].firstElementChild?.firstElementChild?.remove();
       }
     }
   }
 
-  clearPath(){
+  clearPath(): void {
     var ele = document.getElementsByClassName('node-con');
     for(var i=0; i<ele.length; i++){
-      ele[i].firstElementChild?.classList.remove('path')
-      ele[i].firstElementChild?.classList.remove('visited')
-      ele[i].firstElementChild?.classList.remove('boom-visited')
+      ele[i].firstElementChild?.classList.remove('path');
+      ele[i].firstElementChild?.classList.remove('visited');
+      ele[i].firstElementChild?.classList.remove('boom-visited');
     }
   }
 
-
-  generateWallMaze(){
+  generateWallMaze(): void {
     this.clearWall();
-    new Maze().randomMaze(this.row, this.col, this.boom)
+    new Maze().randomMaze(this.row, this.col, this.boom);
   }
 
-  generateWeightMaze(){
+  generateWeightMaze(): void {
     this.clearWall();
     if(this.isWeight)
-      new Maze().randomWeight(this.row, this.col)
+      new Maze().randomWeight(this.row, this.col);
   }
 
-  next(){
+  next(): void {
     this.page += 1;
     if(this.page > 7){
-      document.getElementById('popup')?.remove()
+      document.getElementById('popup')?.remove();
     }
   }
 
-  previous(){
+  previous(): void {
     if(this.page  >= 1){
       this.page -= 1;
     }
   }
 
-  skip(){
-    document.getElementById('popup')?.remove()
+  skip(): void {
+    document.getElementById('popup')?.remove();
   }
-
 }
 
 

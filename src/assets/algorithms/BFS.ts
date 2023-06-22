@@ -1,12 +1,11 @@
-import { wait } from "./Timmer";
-
+import { wait } from "../helper/Timmer";
 
 export class BFS{
     
-    path:any = [];
-    path_b:any = [];
+    path: any = [];
+    path_b: any = [];
 
-    public async search(graph:any, start:any, goal:any){
+    public async search(graph: any, start: any, goal: any) {
         var queue = [];
         var visited = [];
         
@@ -26,7 +25,7 @@ export class BFS{
             
             
             if(ele === goal){
-                console.log("Success");
+                // Sucess
                 this.solve(goal,prev, this.path);
                 this.drawPath();
                 return prev;
@@ -102,7 +101,7 @@ public async search_boom(graph:any, start:any, goal:any, boom:any){
         
         
         if(ele === boom){
-            console.log("Success");
+            // Sucess
             this.solve(boom,prev, this.path_b);
             this.search(graph,boom,goal)
             return prev;
@@ -121,6 +120,4 @@ public async search_boom(graph:any, start:any, goal:any, boom:any){
 }
 return prev;
 }
-
-
 }

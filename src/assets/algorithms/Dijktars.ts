@@ -1,4 +1,4 @@
-import { wait } from "./Timmer";
+import { wait } from "../helper/Timmer";
 
 export class Dijktars{
 
@@ -16,56 +16,40 @@ export class Dijktars{
         visited.push(start)
         while(queue.length > 0){
             var ele:any = queue.shift().split(" ")[0].trim();
-            // console.log("Node: "+ele)
             var pweight = this.getWeight(ele)
 
             if(ele == goal){
+                // Success
                 this.solve(pq,goal,this.path)
                 this.draw_path();
                 return;
             }
 
-            document.getElementById(ele)!.firstElementChild!.classList.remove('boom-visited')
+            document.getElementById(ele)!.firstElementChild!.classList.remove('boom-visited');
             document.getElementById(ele)!.firstElementChild!.classList.add('marker');
-            await wait(15)
+            await wait(15);
             document.getElementById(ele)!.firstElementChild!.classList.remove('marker');
-            document.getElementById(ele)!.firstElementChild!.classList.add('visited')
+            document.getElementById(ele)!.firstElementChild!.classList.add('visited');
 
-            await wait(15)
+            await wait(15);
             for(var i =0; i<graph[ele].length; i++){
 
                 if(ele != start &&!document.getElementById(graph[ele][i])!.firstElementChild!.classList.contains('visited')&&!document.getElementById(graph[ele][i])!.firstElementChild!.classList.contains('wall')&&!visited.includes(graph[ele][i])){
-                    // console.log("Added");
-                    
-                    visited.push(graph[ele][i])
-
-                    // console.log("W: "+pq[ele][0]);
-                    pq[graph[ele][i]] = [(pq[ele][0]+this.getWeight(graph[ele][i])),ele]
-                    
-
-                    queue.push(`${graph[ele][i]} ${(pq[ele][0]+this.getWeight(graph[ele][i]))}`)
-                    // console.log("Q: "+queue);
-                    // console.log(pq);
-
+                    visited.push(graph[ele][i]);
+                    pq[graph[ele][i]] = [(pq[ele][0]+this.getWeight(graph[ele][i])),ele];
+                    queue.push(`${graph[ele][i]} ${(pq[ele][0]+this.getWeight(graph[ele][i]))}`);
                     const getVal = (str: any) => str.split(' ')[1];
                     queue.sort((a, b) => getVal(a) - getVal(b));
-                    // console.log("testArray: "+queue);
                 }
 
                 else if(!document.getElementById(graph[ele][i])!.firstElementChild!.classList.contains('visited')&&!document.getElementById(graph[ele][i])!.firstElementChild!.classList.contains('wall')&&!visited.includes(graph[ele][i])){
-                    // console.log("Added");
-                    visited.push(graph[ele][i])
-                    pq[graph[ele][i]] = [(pweight+this.getWeight(graph[ele][i])),ele]
-                    queue.push(`${graph[ele][i]} ${(pweight+this.getWeight(graph[ele][i]))}`)
-                    // console.log("Q: "+queue);
-                    // console.log(pq);
+                    visited.push(graph[ele][i]);
+                    pq[graph[ele][i]] = [(pweight+this.getWeight(graph[ele][i])),ele];
+                    queue.push(`${graph[ele][i]} ${(pweight+this.getWeight(graph[ele][i]))}`);
                     const getVal = (str:any) => str.split(' ')[1];
                     queue.sort((a, b) => getVal(a) - getVal(b));
-                    // console.log("testArray: "+queue);
                 }
-
             }
-            // console.log(pq);
         }
     }
 
@@ -78,58 +62,43 @@ export class Dijktars{
         pq[start] = [0,null];
 
         queue.push(start);
-        visited.push(start)
+        visited.push(start);
         while(queue.length > 0){
             var ele:any = queue.shift().split(" ")[0].trim();
-            // console.log("Node: "+ele)
-            var pweight = this.getWeight(ele)
+            var pweight = this.getWeight(ele);
 
             if(ele == boom){
-                this.solve(pq,boom, this.path_b)
-                this.search(graph, boom, goal)
+                // Sucess
+                this.solve(pq,boom, this.path_b);
+                this.search(graph, boom, goal);
                 return;
             }
 
             document.getElementById(ele)!.firstElementChild!.classList.add('marker');
             await wait(15)
             document.getElementById(ele)!.firstElementChild!.classList.remove('marker');
-            document.getElementById(ele)!.firstElementChild!.classList.add('boom-visited')
+            document.getElementById(ele)!.firstElementChild!.classList.add('boom-visited');
 
             await wait(15)
             for(var i =0; i<graph[ele].length; i++){
 
                 if(ele != start &&!document.getElementById(graph[ele][i])!.firstElementChild!.classList.contains('boom-visited')&&!document.getElementById(graph[ele][i])!.firstElementChild!.classList.contains('wall')&&!visited.includes(graph[ele][i])){
-                    // console.log("Added");
-                    
-                    visited.push(graph[ele][i])
-
-                    // console.log("W: "+pq[ele][0]);
-                    pq[graph[ele][i]] = [(pq[ele][0]+this.getWeight(graph[ele][i])),ele]
-                    
-
-                    queue.push(`${graph[ele][i]} ${(pq[ele][0]+this.getWeight(graph[ele][i]))}`)
-                    // console.log("Q: "+queue);
-                    // console.log(pq);
+                    visited.push(graph[ele][i]);
+                    pq[graph[ele][i]] = [(pq[ele][0]+this.getWeight(graph[ele][i])),ele];
+                    queue.push(`${graph[ele][i]} ${(pq[ele][0]+this.getWeight(graph[ele][i]))}`);
 
                     const getVal = (str: any) => str.split(' ')[1];
                     queue.sort((a, b) => getVal(a) - getVal(b));
-                    // console.log("testArray: "+queue);
                 }
 
                 else if(!document.getElementById(graph[ele][i])!.firstElementChild!.classList.contains('boom-visited')&&!document.getElementById(graph[ele][i])!.firstElementChild!.classList.contains('wall')&&!visited.includes(graph[ele][i])){
-                    // console.log("Added");
-                    visited.push(graph[ele][i])
-                    pq[graph[ele][i]] = [(pweight+this.getWeight(graph[ele][i])),ele]
-                    queue.push(`${graph[ele][i]} ${(pweight+this.getWeight(graph[ele][i]))}`)
-                    // console.log("Q: "+queue);
-                    // console.log(pq);
+                    visited.push(graph[ele][i]);
+                    pq[graph[ele][i]] = [(pweight+this.getWeight(graph[ele][i])),ele];
+                    queue.push(`${graph[ele][i]} ${(pweight+this.getWeight(graph[ele][i]))}`);
                     const getVal = (str:any) => str.split(' ')[1];
                     queue.sort((a, b) => getVal(a) - getVal(b));
-                    // console.log("testArray: "+queue);
                 }
-
             }
-            // console.log(pq);
         }
     }
 

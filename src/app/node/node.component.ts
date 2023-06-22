@@ -1,5 +1,4 @@
 import { Component, Input } from '@angular/core';
-import { AppComponent } from '../app.component';
 
 @Component({
   selector: 'app-node',
