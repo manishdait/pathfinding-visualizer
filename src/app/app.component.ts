@@ -41,6 +41,10 @@ export class AppComponent implements AfterViewInit, OnInit {
   boomAdded: boolean = false; 
 
   ngOnInit(): void {
+    this.start = '[12,12]';
+    this.end = '[12,58]';
+    this.boom= '[12,35]';
+
     if(this.window_width <= 1440 && this.window_width > 1025) {
       this.row = 32;
       this.col = 56;
@@ -152,6 +156,9 @@ export class AppComponent implements AfterViewInit, OnInit {
       var startNode = document.getElementById(this.start)!.firstChild;
       var targetNode = document.getElementById(this.end)!.firstChild;
 
+      document.getElementById(this.start)!.firstElementChild!.innerHTML = '';
+      document.getElementById(this.end)!.firstElementChild!.innerHTML = '';
+
       var img = document.createElement('span');
       img.className = 'material-symbols-outlined'
       img.classList.add('icon');
@@ -236,7 +243,16 @@ export class AppComponent implements AfterViewInit, OnInit {
   }
 
   clearBoard(): void {
-    window.location.href = 'https://manishdait.github.io/pathfinding-visualizer/';
+    this.clearPath();
+    this.clearWall();
+    document.getElementById(this.start)!.firstElementChild!.innerHTML = '';
+    document.getElementById(this.end)!.firstElementChild!.innerHTML = '';
+    if(this.boomAdded) {
+      this.boomAdded = false;
+      document.getElementById('boom')?.remove();
+    }
+    this.ngOnInit();
+    this.ngAfterViewInit();
   }
 
   clearWall(): void {
