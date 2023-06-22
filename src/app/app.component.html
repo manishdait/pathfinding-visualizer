@@ -182,7 +182,7 @@
 
 <div>
   <div class="grid" id="grid">
-    <app-node class="node-con"  (dragover)="allaowImageDrop($event)" (drop)="imageDrop($event)" #Appnode appMouseActivites *appFillMaze="row; col:col; let i = appFillMazeId; let c = appFillMazeCount" [attr.rc]="i" [id]="i" [isWeight]="isWeight" [isWall]="isWall" [attr.count]="c" [attr.weight]="1"></app-node>
+    <app-node class="node-con"  (dragover)="allaowImageDrop($event)" (drop)="imageDrop($event)" #Appnode appMouseActivites *appFillMaze="row; col:col; let i = appFillMazeId; let c = appFillMazeCount" [attr.rc]="i" [id]="i" [isWeight]="isWeight" [isWall]="isWall" [isDisable]="disAble" [attr.count]="c" [attr.weight]="1"></app-node>
   </div>
 </div>
 
