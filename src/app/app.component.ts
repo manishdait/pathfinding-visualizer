@@ -4,6 +4,7 @@ import { Maze } from 'src/assets/algorithms/Maze';
 import { Grid } from 'src/assets/helper/Grid';
 import { BFS } from '../assets/algorithms/BFS';
 import { DFS } from '../assets/algorithms/DFS';
+import { BiDirectional } from 'src/assets/algorithms/BiDirectional';
 
 @Component({
   selector: 'app-root',
@@ -154,6 +155,17 @@ export class AppComponent implements AfterViewInit, OnInit {
           await new Dijktars().search(this.graph,this.start, this.end);
         
         this.disAble=false;
+        break;
+
+      case 'BiDirectional':
+        this.disAble=true
+        if(this.boomAdded)
+          await new BiDirectional().search_boom(this.graph,this.start,this.end,this.boom);
+        else
+          await new BiDirectional().search(this.graph,this.start, this.end);
+        
+        this.disAble=false;
+
     }
   }
 
