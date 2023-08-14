@@ -157,7 +157,7 @@ export class AppComponent implements AfterViewInit, OnInit {
         this.disAble=false;
         break;
 
-      case 'BiDirectional':
+      case 'Bidirectional':
         this.disAble=true
         if(this.boomAdded)
           await new BiDirectional().search_boom(this.graph,this.start,this.end,this.boom);
