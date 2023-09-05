@@ -49,7 +49,7 @@ Then, open your browser and navigate to `http://localhost:4200/`.
 
 `Pathfinding Visualizer` provides the following features:
 
-- Visualizes various pathfinding algorithms, including `Dijkstra's algorithm`, `Breadth First Search` and `Depth First Search`.
+- Visualizes various pathfinding algorithms, including `Dijkstra's algorithm`, `Breadth First Search`, `Depth First Search` and `BiDirectional Search`.
 - Allows users to draw obstacles and set the start and end points on a grid
 - Highlights the cells of the grid being visited during the search process, making it easy to understand how each algorithm works
 
