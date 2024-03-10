@@ -86,7 +86,6 @@ export class Dijktars{
                     visited.push(graph[ele][i]);
                     pq[graph[ele][i]] = [(pq[ele][0]+this.getWeight(graph[ele][i])),ele];
                     queue.push(`${graph[ele][i]} ${(pq[ele][0]+this.getWeight(graph[ele][i]))}`);
-
                     const getVal = (str: any) => str.split(' ')[1];
                     queue.sort((a, b) => getVal(a) - getVal(b));
                 }

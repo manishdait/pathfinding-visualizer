@@ -135,6 +135,7 @@
         <li class="opt" (click)="this.selectedAlgo = 'Breath First Search'; toggleAlgo(); this.isWeight = false">Breath First Search</li>
         <li class="opt" (click)="this.selectedAlgo = 'Depth First Search'; toggleAlgo(); this.isWeight = false">Depth First Search</li>
         <li class="opt" (click)="this.selectedAlgo = 'Dijktras'; toggleAlgo(); this.isWeight = true">Dijistras</li>
+        <li class="opt" (click)="this.selectedAlgo = 'Astar'; toggleAlgo(); this.isWeight = true">Astar</li>
         <li class="opt" (click)="this.selectedAlgo = 'Bidirectional'; toggleAlgo(); this.isWeight = false">Bidirectional</li>
       </ul>
     </div>
@@ -178,6 +179,7 @@
   <p *ngSwitchCase="'Breath First Search'" class="banner">Breath-First Search is <strong><em>unweighted</em></strong> and <strong><em>guarantees</em></strong> shortest path.</p>
   <p *ngSwitchCase="'Depth First Search'" class="banner">Depth-First Search is <strong><em>unweighted</em></strong> and <strong><em>desn't guarantees</em></strong> shortest path!</p>
   <p *ngSwitchCase="'Dijktras'" class="banner">Dijktras is <strong><em>weighted</em></strong> and <strong><em>guarantees</em></strong> shortest path.</p>
+  <p *ngSwitchCase="'Astar'" class="banner">Astar is <strong><em>weighted</em></strong> and <strong><em>guarantees</em></strong> shortest path.</p>
   <p *ngSwitchCase="'Bidirectional'" class="banner">Bidirectional (BFS) use <strong><em>two separate searches</em></strong> from <strong><em>source</em></strong> and <strong><em>target</em></strong>.</p>
 </div>
 

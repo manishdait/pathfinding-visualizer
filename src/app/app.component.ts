@@ -5,6 +5,7 @@ import { Grid } from 'src/assets/helper/Grid';
 import { BFS } from '../assets/algorithms/BFS';
 import { DFS } from '../assets/algorithms/DFS';
 import { BiDirectional } from 'src/assets/algorithms/BiDirectional';
+import { Astar } from 'src/assets/algorithms/Astart';
 
 @Component({
   selector: 'app-root',
@@ -35,9 +36,9 @@ export class AppComponent implements AfterViewInit, OnInit {
   row: number = 28;
   col: number = 70;
 
-  start: string = '[12,12]';
-  end: string = '[12,58]';
-  boom: string = '[12,35]';
+  start!: string;
+  end!: string;
+  boom!: string;
  
   boomAdded: boolean = false; 
 
@@ -74,7 +75,7 @@ export class AppComponent implements AfterViewInit, OnInit {
     }
   }
 
-  graph: any = {};
+  graph: {[key: string]:string[]} = {};
 
   toggleAlgo(): void {
     if(!this.disAble) {
@@ -118,7 +119,6 @@ export class AppComponent implements AfterViewInit, OnInit {
         if(this.disAble){
           return;
         }
-       // Dragging
       });
     
       node?.appendChild(img);
@@ -165,7 +165,17 @@ export class AppComponent implements AfterViewInit, OnInit {
           await new BiDirectional().search(this.graph,this.start, this.end);
         
         this.disAble=false;
+        break
 
+      case 'Astar':
+          this.disAble=true
+          if(this.boomAdded)
+            await new Astar().search_bomb(this.graph, new Grid().mapHurestic(this.end, this.row, this.col),this.start,this.end,this.boom);
+          else
+            await new Astar().search(this.graph, new Grid().mapHurestic(this.end, this.row, this.col),this.start, this.end);
+          
+          this.disAble=false;
+          break;
     }
   }
 
@@ -196,7 +206,6 @@ export class AppComponent implements AfterViewInit, OnInit {
         if(this.disAble){
           return;
         }
-        //On dragging.
       });
 
       document.getElementById(this.start)!.setAttribute('weight','0');
@@ -222,7 +231,6 @@ export class AppComponent implements AfterViewInit, OnInit {
         if(this.disAble){
           return;
         }
-        //On dragging.
       });
       
       img.id = 'goal';
