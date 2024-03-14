@@ -327,9 +327,9 @@
     font-size: 1rem !important;
     grid-template-columns: repeat(70, 1fr);
     grid-template-rows: repeat(28, 1fr);
-    grid-gap: 1px; 
-    border: 1px solid rgba(0, 110, 255, 0.418);
-    background-color: rgba(0, 110, 255, 0.418);
+    
+    border: 1px solid rgba(0, 132, 255, 0.233);
+    background-color: rgba(255, 255, 255, 0.418);
     margin: 0px 2px;
 }
 

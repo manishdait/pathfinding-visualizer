@@ -12,6 +12,7 @@
     align-items: center;
     justify-content: center;
     background-color: white;
+    border: rgba(0, 132, 255, 0.233) 0.1rem solid;
 }
 
 .node span{
@@ -28,7 +29,7 @@
 
 .wall{
     background-color: black !important;
-    border: black !important;
+    border: black 0.1rem solid !important;
 }
 
 .visited{
