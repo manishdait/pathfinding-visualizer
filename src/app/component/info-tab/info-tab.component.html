@@ -1,0 +1,10 @@
+<div class="info_nav">
+    <div><span class="material-symbols-outlined">emergency</span> <p>Source Node</p></div>
+    <div><span class="material-symbols-outlined">nest_heat_link_e</span> <p>Target Node</p></div>
+    <div [ngClass]="{red:!is_weight}"><span class="material-symbols-outlined fill">weight</span> <p [ngClass]="{dash:!is_weight}">Weighted Node</p></div>
+    <div><span class="material-symbols-outlined">circle</span> <p>Bomb Node</p></div>
+    <div><div class="node_p" style="border: 1px solid rgb(0, 174, 255)"></div> <p>Unvisited Node</p></div>
+    <div><div class="node_p" style="background-color: black;"></div> <p>Wall Node</p></div>
+    <div><div class="node_p" style="background-color: rgb(212, 0, 255)"></div><div class="node-p" style="background-color: rgb(0, 174, 255)"></div> <p>Visited Node</p></div>
+    <div><div class="node_p" style="background-color: rgb(245, 192, 48);"></div> <p>Path Node</p></div>
+</div>

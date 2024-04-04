@@ -1,0 +1,18 @@
+<div class="card_container">
+  <div class="card">
+    <h1 class="card_title">{{ card_template.title }}</h1>
+    <div class="center_div">
+      <p class="card_heading">{{ card_template.heading }}</p>
+      <div class="card_sub_heading" [innerHtml]="card_template.sub_heading"></div>
+      <div class="card_img_container">
+        @if (card_template.img != "") {
+          <img [src]="card_template.img">
+        }
+      </div>
+    </div>
+
+    <div style="display: flex; width: 100%;">
+      <app-toggle class="center_div"></app-toggle>
+    </div>
+  </div>
+</div>

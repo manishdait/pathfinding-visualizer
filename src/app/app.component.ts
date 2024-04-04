@@ -1,37 +1,49 @@
-import { Component, AfterViewInit, OnInit } from '@angular/core';
-import { Dijktars } from 'src/assets/algorithms/Dijktars';
-import { Maze } from 'src/assets/algorithms/Maze';
-import { Grid } from 'src/assets/helper/Grid';
-import { BFS } from '../assets/algorithms/BFS';
-import { DFS } from '../assets/algorithms/DFS';
-import { BiDirectional } from 'src/assets/algorithms/BiDirectional';
-import { Astar } from 'src/assets/algorithms/Astart';
+import { Component } from '@angular/core';
+import { BFS } from '../assets/algorithm/bfs';
+import { Astar } from '../assets/algorithm/a_start';
+import { BiDirectional } from '../assets/algorithm/bi_directional';
+import { DFS } from '../assets/algorithm/dfs';
+import { Dijktars } from '../assets/algorithm/dijktars';
+import { Maze } from '../assets/algorithm/maze';
+import { Grid } from '../assets/helper/grid';
+import { NodeComponent } from './component/node/node.component';
+import { MapMazeDirective } from './directive/map-maze.directive';
+import { CreateWallWeightDirective } from './directive/create-wall-weight.directive';
+import { CommonModule } from '@angular/common';
+import { TutorialComponent } from './component/tutorial/tutorial.component';
+import { NavbarComponent } from './component/navbar/navbar.component';
+import { InfoTabComponent } from './component/info-tab/info-tab.component';
+import { BannerComponent } from './component/banner/banner.component';
 
 @Component({
   selector: 'app-root',
+  standalone: true,
+  imports: [
+    NodeComponent, 
+    TutorialComponent, 
+    NavbarComponent,
+    InfoTabComponent,
+    BannerComponent,
+    MapMazeDirective, 
+    CreateWallWeightDirective, 
+    CommonModule
+  ],
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrl: './app.component.css'
 })
-export class AppComponent implements AfterViewInit, OnInit {
-  title: string = 'PathFindingVisualizer';
-  page: number  = 1;
-
-  disAble: boolean = false;
+export class AppComponent {
 
   window_width: any = window.innerWidth;
-  selectedAlgo: string = 'Algorithm';
+
+  private _disable: boolean = false;
+  private _selected_algorithm = 'Algorithm'
+
   source: string = 'keyboard_arrow_right';
 
-  algo: boolean = false;
-  maze: boolean = false;
   dragged: any;
 
-  isWeight: boolean = false;
-  isWall: boolean = true;
-
-  get isWeg(): any {
-    return this.isWeight;
-  }
+  private _is_weight: boolean = false;
+  is_wall: boolean = true;
 
   row: number = 28;
   col: number = 70;
@@ -40,7 +52,42 @@ export class AppComponent implements AfterViewInit, OnInit {
   end!: string;
   boom!: string;
  
-  boomAdded: boolean = false; 
+  private _boom_added: boolean = false; 
+
+
+  graph: {[key: string]:string[]} = {};
+
+  get is_weight(): boolean {
+    return this._is_weight;
+  }
+
+  set is_weight(is_weight: boolean) {
+    this._is_weight = is_weight
+  }
+
+  get disable(): boolean {
+    return this._disable;
+  }
+
+  set disable(disable: boolean) {
+    this._disable = disable;
+  }
+
+  get boom_added(): boolean {
+    return this._boom_added;
+  }
+
+  set boom_added(boom_added: boolean) {
+    this._boom_added = boom_added;
+  }
+
+  get selected_algorithm(): string {
+    return this._selected_algorithm;
+  }
+
+  set selected_algorithm(algorithm: string) {
+    this._selected_algorithm = algorithm;
+  }
 
   ngOnInit(): void {
     this.start = '[12,12]';
@@ -75,27 +122,98 @@ export class AppComponent implements AfterViewInit, OnInit {
     }
   }
 
-  graph: {[key: string]:string[]} = {};
+  ngAfterViewInit(): void {
+    this.graph = new Grid().mapGrid(this.row,this.col);
+    var startNode = document.getElementById(this.start)!.firstChild;
+    var targetNode = document.getElementById(this.end)!.firstChild;
 
-  toggleAlgo(): void {
-    if(!this.disAble) {
-      this.algo = !this.algo;
-    }
+    document.getElementById(this.start)!.firstElementChild!.innerHTML = '';
+    document.getElementById(this.end)!.firstElementChild!.innerHTML = '';
+
+    var img = document.createElement('span');
+    img.className = 'material-symbols-outlined'
+    img.classList.add('icon');
+    img.innerHTML = 'emergency';
+    img.draggable = true
+    img.id = 'start';
+
+    img.addEventListener("dragstart",(event) => {
+      if(this.disable){
+        return;
+      }
+      this.is_wall = false;
+      this.dragged = event!.target!;
+    });
+
+    img.addEventListener("drag",(event)=> {
+      if(this.disable){
+        return;
+      }
+    });
+
+    document.getElementById(this.start)!.setAttribute('weight','0');
+
+    startNode!.appendChild(img)
+
+    var img = document.createElement('span');
+    img.className = 'material-symbols-outlined'
+    img.innerHTML = 'nest_heat_link_e';
+    img.classList.add('icon');
+    img.draggable = true
+
+    img.addEventListener("dragstart",(event) => {
+      if(this.disable){
+        return;
+      }
+      this.is_wall = false;
+      this.dragged = event!.target!;
+    });
+
+
+    img.addEventListener("drag",(event)=> {
+      if(this.disable){
+        return;
+      }
+    });
     
-    this.maze = false;
+    img.id = 'goal';
+    targetNode!.appendChild(img);
   }
 
-  toggleMaze(): void {
-    if(!this.disAble) {
-      this.maze = !this.maze;
+  allow_image_drop(event: any): any {
+    if(this.disable){
+      return;
     }
-    
-    this.algo = false;
+    event.preventDefault();
   }
 
-  addBoom(): void {
-    if(this.boomAdded) {
-      this.boomAdded = false;
+  image_drop(event: any): any {
+    if(this.disable){
+      return;
+    }
+    event.preventDefault();
+    
+    var data = this.dragged;
+    event.target.appendChild(data);
+    data.style.display = 'block';
+    this.is_wall = true;
+    
+    if(data.id == 'start') {
+        this.start = event.target.parentElement.id;
+    }
+  
+    if(data.id == 'goal') {
+        this.end = event.target.parentElement.id;;
+    }
+  
+    if(data.id == 'boom') {
+      this.boom = event.target.parentElement.id;;
+    }
+  }
+
+  add_boom(): void {
+    if(this.boom_added) {
+      this.boom_added = false;
       document.getElementById('boom')?.remove();
     } else {
       var node = document.getElementById(this.boom)!.firstChild;
@@ -108,180 +226,91 @@ export class AppComponent implements AfterViewInit, OnInit {
       img.id = 'boom';
 
       img.addEventListener("dragstart",(event) => {
-        if(this.disAble){
+        if(this.disable){
           return;
         }
-        this.isWall = false;
+        this.is_wall = false;
         this.dragged = event!.target!;
       });
 
       img.addEventListener("drag",(event)=> {
-        if(this.disAble){
+        if(this.disable){
           return;
         }
       });
     
       node?.appendChild(img);
-      this.boomAdded = true;
+      this.boom_added = true;
     }
   }
 
   async visualize() {
-    switch(this.selectedAlgo) {
+    switch(this._selected_algorithm) {
       case 'Breath First Search':
-        this.disAble = true;
-        if(this.boomAdded)
+        this.disable = true;
+        if(this.boom_added)
           await new BFS().search_boom(this.graph,this.start,this.end,this.boom);
         else
           await new BFS().search(this.graph,this.start, this.end);
 
-        this.disAble = false;
+        this.disable = false;
         break;
 
       case 'Depth First Search':
-        this.disAble = true;
-        if(this.boomAdded)
+        this.disable = true;
+        if(this.boom_added)
           await new DFS().search_boom(this.graph,this.start,this.end,this.boom);
         else
           await new DFS().search(this.graph,this.start, this.end);
-          this.disAble = false
+          this.disable = false
         break;
 
       case 'Dijktras':
-        this.disAble=true
-        if(this.boomAdded)
+        this.disable=true
+        if(this.boom_added)
           await new Dijktars().search_boom(this.graph,this.start,this.end,this.boom);
         else
           await new Dijktars().search(this.graph,this.start, this.end);
         
-        this.disAble=false;
+        this.disable=false;
         break;
 
       case 'Bidirectional':
-        this.disAble=true
-        if(this.boomAdded)
+        this.disable=true
+        if(this.boom_added)
           await new BiDirectional().search_boom(this.graph,this.start,this.end,this.boom);
         else
           await new BiDirectional().search(this.graph,this.start, this.end);
         
-        this.disAble=false;
+        this.disable=false;
         break
 
       case 'Astar':
-          this.disAble=true
-          if(this.boomAdded)
+          this.disable=true
+          if(this.boom_added)
             await new Astar().search_bomb(this.graph, new Grid().mapHurestic(this.end, this.row, this.col),this.start,this.end,this.boom);
           else
             await new Astar().search(this.graph, new Grid().mapHurestic(this.end, this.row, this.col),this.start, this.end);
           
-          this.disAble=false;
+          this.disable=false;
           break;
     }
   }
 
-  ngAfterViewInit(): void {
-      this.graph = new Grid().mapGrid(this.row,this.col);
-      var startNode = document.getElementById(this.start)!.firstChild;
-      var targetNode = document.getElementById(this.end)!.firstChild;
-
-      document.getElementById(this.start)!.firstElementChild!.innerHTML = '';
-      document.getElementById(this.end)!.firstElementChild!.innerHTML = '';
-
-      var img = document.createElement('span');
-      img.className = 'material-symbols-outlined'
-      img.classList.add('icon');
-      img.innerHTML = 'emergency';
-      img.draggable = true
-      img.id = 'start';
-
-      img.addEventListener("dragstart",(event) => {
-        if(this.disAble){
-          return;
-        }
-        this.isWall = false;
-        this.dragged = event!.target!;
-      });
-
-      img.addEventListener("drag",(event)=> {
-        if(this.disAble){
-          return;
-        }
-      });
-
-      document.getElementById(this.start)!.setAttribute('weight','0');
-
-      startNode!.appendChild(img)
-
-      var img = document.createElement('span');
-      img.className = 'material-symbols-outlined'
-      img.innerHTML = 'nest_heat_link_e';
-      img.classList.add('icon');
-      img.draggable = true
-
-      img.addEventListener("dragstart",(event) => {
-        if(this.disAble){
-          return;
-        }
-        this.isWall = false;
-        this.dragged = event!.target!;
-      });
-
-
-      img.addEventListener("drag",(event)=> {
-        if(this.disAble){
-          return;
-        }
-      });
-      
-      img.id = 'goal';
-      targetNode!.appendChild(img);
-  }
-
-  allaowImageDrop(event: any): any {
-    if(this.disAble){
-      return;
-    }
-    event.preventDefault();
-  }
-
-  imageDrop(event: any): any {
-    if(this.disAble){
-      return;
-    }
-    event.preventDefault();
-    
-    var data = this.dragged;
-    event.target.appendChild(data);
-    data.style.display = 'block';
-    this.isWall = true;
-    
-    if(data.id == 'start') {
-        this.start = event.target.parentElement.id;
-    }
-
-    if(data.id == 'goal') {
-        this.end = event.target.parentElement.id;;
-    }
-
-    if(data.id == 'boom') {
-      this.boom = event.target.parentElement.id;;
-    }
-  }
-
-  clearBoard(): void {
-    this.clearPath();
-    this.clearWall();
+  clear_board(): void {
+    this.clear_path();
+    this.clear_wall();
     document.getElementById(this.start)!.firstElementChild!.innerHTML = '';
     document.getElementById(this.end)!.firstElementChild!.innerHTML = '';
-    if(this.boomAdded) {
-      this.boomAdded = false;
+    if(this.boom_added) {
+      this.boom_added = false;
       document.getElementById('boom')?.remove();
     }
     this.ngOnInit();
     this.ngAfterViewInit();
   }
 
-  clearWall(): void {
+  clear_wall(): void {
     var ele = document.getElementsByClassName('node-con');
     for(var i=0; i<ele.length; i++) {
       ele[i].firstElementChild?.classList.remove('wall');
@@ -291,7 +320,7 @@ export class AppComponent implements AfterViewInit, OnInit {
     }
   }
 
-  clearPath(): void {
+  clear_path(): void {
     var ele = document.getElementsByClassName('node-con');
     for(var i=0; i<ele.length; i++){
       ele[i].firstElementChild?.classList.remove('path');
@@ -300,34 +329,15 @@ export class AppComponent implements AfterViewInit, OnInit {
     }
   }
 
-  generateWallMaze(): void {
-    this.clearWall();
+  generate_wall_maze(): void {
+    this.clear_wall();
     new Maze().randomMaze(this.row, this.col, this.boom);
   }
 
-  generateWeightMaze(): void {
-    this.clearWall();
-    if(this.isWeight)
+  generate_weight_maze(): void {
+    this.clear_wall();
+    if(this.is_weight)
       new Maze().randomWeight(this.row, this.col);
   }
 
-  next(): void {
-    this.page += 1;
-    if(this.page > 7){
-      document.getElementById('popup')?.remove();
-    }
-  }
-
-  previous(): void {
-    if(this.page  >= 1){
-      this.page -= 1;
-    }
-  }
-
-  skip(): void {
-    document.getElementById('popup')?.remove();
-  }
 }
-
-
-

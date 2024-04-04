@@ -1,0 +1,11 @@
+<div class="dropdown" [ngClass]="{'disable': disable}">
+    <p (click)="toggle()">
+        {{ selected_algo }} 
+        <span class="material-symbols-outlined" [ngClass]="is_toggle? 'rotate': 'none'">expand_more</span>
+    </p>
+    <ul class="dropmenu" id="menu" [ngClass]="is_toggle? 'display_menu':'hide_menu'">
+        @for (algorithm of algorithms; track algorithm.name) {
+            <li class="option" (click)="select_algo(algorithm); toggle()">{{ algorithm.name }}</li>
+        }
+    </ul>
+</div>
