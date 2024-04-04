@@ -1,0 +1,10 @@
+.pop_up {
+    position: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+    width: 100vw;
+    background-color: rgba(14, 14, 14, 0.507);
+    height: 100vh;
+}

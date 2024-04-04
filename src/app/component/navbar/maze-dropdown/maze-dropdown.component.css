@@ -1,0 +1,104 @@
+.dropdown {
+    margin-left: 2px;
+}
+
+.dropdown p:hover, .dropdown p:focus {
+    color: rgb(255, 153, 0);
+}
+
+.dropdown p {
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1em;
+    font-weight: 400;
+    text-align: center;
+    height: 100%;
+    cursor: pointer;
+}
+
+.option {
+    cursor: pointer;
+}
+
+.material-symbols-outlined {
+    transition: transform 0.4s linear;
+    font-size: 1em;
+    font-weight: 400;
+}
+
+
+.dropmenu li {
+    color: white;
+    font-size: 1rem;
+    font-weight: 400;
+    padding: .7em .7em;
+}
+
+.dropmenu {
+    display: none;
+    position: absolute;
+    background-color: rgb(12, 14, 34);
+    list-style-type: none;
+    top: 72px;
+    padding: 5px 2px;
+    border-radius: 4px;
+}
+
+.display_menu {
+    display: block !important;
+}
+
+.hide_menu {
+    display: none !important;
+}
+
+.rotate {
+    transform: rotate(180deg);
+    transition: transform 0.3s linear;
+}
+
+.dash {
+    text-decoration: line-through;
+}
+
+.disable {
+    pointer-events: none;
+    cursor: default;
+    color: rgb(168, 168, 168) !important;
+}
+
+.disable p {
+    color: rgb(168, 168, 168) !important;
+}
+
+@media screen and (max-width: 733px) {
+    .dropmenu {
+        top: 88px;
+    }
+}
+
+@media screen and (max-width: 695px) {
+   .dropmenu {
+    top: 81px;
+   }
+}
+
+@media screen and (max-width: 1440px) {
+    .dropmenu{
+        top: 62px;
+    }
+}
+
+@media screen and (max-width: 1025px) {
+    .dropmenu{
+        top: 95px;
+    }
+}
+
+@media screen and (max-width: 695px) {
+   .dropmenu{
+     top: 81px;
+    }
+}

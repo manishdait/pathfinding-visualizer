@@ -1,0 +1,23 @@
+.bttn_container {
+    display: flex; 
+    align-items: center; 
+    justify-content: space-between; 
+    padding: 0.4em 0.2em; 
+    margin: 0.6em;
+}
+
+.bttn {
+    background-color: rgb(255, 153, 0);
+    color: white;
+    font-size: 1em;
+    padding: .6em .8em;
+    font-weight: 400;
+    border-radius: 4px;
+    cursor: pointer;
+    border: none;
+    outline: transparent;
+}
+
+.bttn:focus, .bttn:hover {
+    background-color: rgb(167, 163, 158);
+}

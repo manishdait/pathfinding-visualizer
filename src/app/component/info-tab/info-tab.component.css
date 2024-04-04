@@ -1,0 +1,37 @@
+.info_nav {
+    padding: 1.2em 1em;
+    flex-wrap: wrap;
+    display: flex;
+    gap: 1em;
+    justify-content: flex-start;
+}
+
+.info_nav div {
+    display: flex;
+    gap: 3px;
+    align-items: center;
+    justify-content: center;
+}
+
+.info_nav div p {
+    font-size: 1rem;
+}
+
+.info_nav div span {
+    font-size: 1.2rem !important;
+    font-weight: 400 !important;
+    color: rgb(38, 37, 80);
+}
+
+.node_p {
+    width: 1.2rem;
+    height: 1.2rem;
+}
+
+.red {
+    color: rgb(207, 13, 13);
+}
+
+.dash {
+    text-decoration: line-through;
+}

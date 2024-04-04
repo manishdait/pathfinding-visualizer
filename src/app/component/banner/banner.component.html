@@ -1,0 +1,22 @@
+<div>
+    @switch (algorithm) {
+        @case ("Breath First Search") {
+            <p class="banner">Breath-First Search is <strong><em>unweighted</em></strong> and <strong><em>guarantees</em></strong> shortest path.</p>
+        }
+        @case ("Depth First Search") {
+            <p class="banner">Depth-First Search is <strong><em>unweighted</em></strong> and <strong><em>desn't guarantees</em></strong> shortest path!</p>
+        }
+        @case ("Dijktras") {
+            <p class="banner">Dijktras is <strong><em>weighted</em></strong> and <strong><em>guarantees</em></strong> shortest path.</p>
+        }
+        @case ("Astar") {
+            <p class="banner">A* Search is an <strong><em>informed best-first</em></strong> search algorithm that <strong><em>efficiently determines</em></strong> the shortest path</p>
+        }
+        @case ("Bidirectional") {
+            <p class="banner">Bidirectional (BFS) use <strong><em>two separate searches</em></strong> from <strong><em>source</em></strong> and <strong><em>target</em></strong>.</p>
+        }
+        @default {
+            <p class="banner">Pick an <strong><em>Algorithm</em></strong> to Visualize!</p>
+        }
+    }    
+   </div>

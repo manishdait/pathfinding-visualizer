@@ -1,0 +1,10 @@
+<div class="dropdown" [ngClass]="{'disable': disable}">
+    <p (click)="toggle()">
+        Mazes 
+        <span class="material-symbols-outlined" [ngClass]="is_toggle? 'rotate': 'none'">expand_more</span>
+    </p>
+    <ul class="dropmenu" id="menu"  [ngClass]="is_toggle? 'display_menu': 'hide_menu'">
+        <li class="option" (click)="toggle(); generate_wall_maze()">Random Maze</li>
+        <li class="option" [ngClass]="{dash: !is_weight}" (click)="toggle(); generate_weight_maze()">Weighted Maze</li>
+    </ul>
+</div>
