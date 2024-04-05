@@ -27,3 +27,24 @@ i {
     text-decoration: none;
     color: gray;
 }
+
+@media screen and (max-width: 1440px) {
+    .grid {
+        grid-template-columns: repeat(56, 1fr);
+        grid-template-rows: repeat(32, 1fr);
+    }
+}
+
+@media screen and (max-width: 1025px) {
+    .grid {
+        grid-template-columns: repeat(35, 1fr);
+        grid-template-rows: repeat(35, 1fr);
+    }
+}
+
+@media screen and (max-width: 695px) {
+    .grid {
+        grid-template-columns: repeat(20, 1fr);
+        grid-template-rows: repeat(34, 1fr);
+    }
+}
