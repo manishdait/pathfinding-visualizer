@@ -199,15 +199,17 @@ export class AppComponent {
     this.is_wall = true;
     
     if(data.id == 'start') {
+        document.getElementById(this.start)!.setAttribute('weight','1');
         this.start = event.target.parentElement.id;
+        document.getElementById(this.start)!.setAttribute('weight','0');
     }
   
     if(data.id == 'goal') {
-        this.end = event.target.parentElement.id;;
+        this.end = event.target.parentElement.id;
     }
   
     if(data.id == 'boom') {
-      this.boom = event.target.parentElement.id;;
+      this.boom = event.target.parentElement.id;
     }
   }
 
