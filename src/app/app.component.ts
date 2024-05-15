@@ -303,6 +303,7 @@ export class AppComponent {
     this.clear_path();
     this.clear_wall();
     document.getElementById(this.start)!.firstElementChild!.innerHTML = '';
+    document.getElementById(this.start)!.setAttribute('weight','1');
     document.getElementById(this.end)!.firstElementChild!.innerHTML = '';
     if(this.boom_added) {
       this.boom_added = false;
@@ -316,10 +317,13 @@ export class AppComponent {
     var ele = document.getElementsByClassName('node-con');
     for(var i=0; i<ele.length; i++) {
       ele[i].firstElementChild?.classList.remove('wall');
+      ele[i].setAttribute('weight', '1');
       if(ele[i].id != this.start && ele[i].id != this.end && ele[i].id != this.boom){
         ele[i].firstElementChild?.firstElementChild?.remove();
       }
     }
+
+    document.getElementById(this.start)!.setAttribute('weight','0');
   }
 
   clear_path(): void {
