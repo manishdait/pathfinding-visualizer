@@ -17,7 +17,7 @@ export class AlgoDropdownComponent {
 
   algorithms: Algorithm[] = algorithm_list;
 
-  constructor (private appComponent: AppComponent) {}
+  constructor (private appComponent: AppComponent, private navComponent: NavbarComponent) {}
 
   get disable(): boolean {
     return this.appComponent.disable;
@@ -36,6 +36,7 @@ export class AlgoDropdownComponent {
   select_algo(algorithm: Algorithm) {
     this.appComponent.is_weight = algorithm.is_weighted;
     this.appComponent.selected_algorithm = algorithm.name;
+    this.navComponent.buttonMsg = 'Visualize';
   }
 
 }

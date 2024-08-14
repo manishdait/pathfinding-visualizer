@@ -19,7 +19,7 @@ import { BannerComponent } from './component/banner/banner.component';
   selector: 'app-root',
   standalone: true,
   imports: [
-    NodeComponent, 
+    NodeComponent,
     TutorialComponent, 
     NavbarComponent,
     InfoTabComponent,
@@ -37,8 +37,6 @@ export class AppComponent {
 
   private _disable: boolean = false;
   private _selected_algorithm = 'Algorithm'
-
-  source: string = 'keyboard_arrow_right';
 
   dragged: any;
 
@@ -103,22 +101,31 @@ export class AppComponent {
       this.boom = '[15,28]';
     }
 
-    if(this.window_width <= 1025 && this.window_width > 695) {
-      this.row = 35;
-      this.col = 35;
+    if(this.window_width <= 1025 && this.window_width > 740) {
+      this.row = 40;
+      this.col = 50;
 
       this.start = '[20,5]';
-      this.end = '[20,30]';
+      this.end = '[20,40]';
       this.boom = '[20,17]';
     }
 
-    if(this.window_width <= 695) {
-      this.row = 34;
-      this.col = 20;
+    if(this.window_width <= 740 && this.window_width > 450) {
+      this.row = 35;
+      this.col = 35;
 
-      this.start = '[10,5]';
-      this.end = '[10,15]';
-      this.boom = '[10,10]';
+      this.start = '[15,5]';
+      this.end = '[15,30]';
+      this.boom = '[15,15]';
+    }
+
+    if(this.window_width <= 450) {
+      this.row = 30;
+      this.col = 25;
+
+      this.start = '[15,4]';
+      this.end = '[15,20]';
+      this.boom = '[12,10]';
     }
   }
 
@@ -168,7 +175,6 @@ export class AppComponent {
       this.is_wall = false;
       this.dragged = event!.target!;
     });
-
 
     img.addEventListener("drag",(event)=> {
       if(this.disable){
@@ -247,6 +253,7 @@ export class AppComponent {
   }
 
   async visualize() {
+    this.clear_path()
     switch(this._selected_algorithm) {
       case 'Breath First Search':
         this.disable = true;

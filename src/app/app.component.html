@@ -8,8 +8,6 @@
 
 <div>
   <div class="grid" id="grid">
-    <app-node class="node-con"  (dragover)="allow_image_drop($event)" (drop)="image_drop($event)" #Appnode appCreateWallWeight *appMapMaze="row; col:col; let i = appMapMazeId; let c = appFillMazeCount" [attr.rc]="i" [id]="i" [isWeight]="is_weight" [isWall]="is_wall" [isDisable]="disable" [attr.count]="c" [attr.weight]="1"></app-node>
+    <app-node class="node-con" (dragover)="allow_image_drop($event)" (drop)="image_drop($event)" #Appnode appCreateWallWeight *appMapMaze="row; col:col; let i = appMapMazeId; let c = appFillMazeCount" [attr.rc]="i" [id]="i" [isWeight]="is_weight" [isWall]="is_wall" [isDisable]="disable" [attr.count]="c" [attr.weight]="1"></app-node>
   </div>
 </div>
-
-<div class="source_code"><a href="https://github.com/ManishDait/pathfinding-visualizer">&copy;Source Code <i class="fa fa-github"></i></a></div>

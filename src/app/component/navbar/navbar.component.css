@@ -13,6 +13,11 @@
     font-weight: 600;
 }
 
+.navbar h1 a {
+    text-decoration: none;
+    color: white;
+}
+
 .item_holder {
     display: flex;
     flex-grow: 1;

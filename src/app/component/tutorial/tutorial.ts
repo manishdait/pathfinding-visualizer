@@ -48,7 +48,7 @@ export const tutorials: CardTemplate[] = [
     {
       title: `Adding walls and weights`,
       heading: `
-        Click on the grid to add a weight. Move mouse on the grid while pressing Alt to add a wall. 
+        Click on the grid to add a weight. Move mouse on the grid while pressing Shift to add a wall. 
         Generate mazes and patterns from the "Mazes & Patterns" drop-down menu.
       `,
       sub_heading: `

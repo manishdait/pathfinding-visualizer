@@ -18,8 +18,11 @@ import { CommonModule } from '@angular/common';
 export class NavbarComponent {
 
   title: string = 'Pathfinding Visualizer';
+  buttonMsg: string = 'Visualize';
 
-  constructor (private appComponent: AppComponent) {}
+  constructor (private appComponent: AppComponent) {
+
+  }
 
   get disable(): boolean {
     return this.appComponent.disable;
@@ -33,7 +36,15 @@ export class NavbarComponent {
     this.appComponent.add_boom();
   }
 
+  algo_selected(): boolean {
+    return this.appComponent.selected_algorithm != "Algorithm"
+  }
+
   visualize() {
+    if (!this.algo_selected()) {
+      this.buttonMsg = "Pick an Algorithm to Visualize!";
+      return;
+    }
     this.appComponent.visualize();
   }
 

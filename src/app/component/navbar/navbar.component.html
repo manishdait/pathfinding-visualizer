@@ -1,5 +1,5 @@
 <div class="navbar">
-    <h1>{{ title }}</h1>
+    <h1><a href="https://github.com/manishdait/pathfinding-visualizer">{{ title }}</a></h1>
 
     <div class="item_holder">
         <app-algo-dropdown></app-algo-dropdown>
@@ -9,7 +9,7 @@
             <button class="links" (click)="add_boom()" [disabled]="disable" [ngClass]="{'disable': disable}">{{boom_added? 'Remove Boom': 'Add Boom'}}</button>
         </div>
       
-        <button class="bttn" (click)="visualize()" [disabled]="disable" [ngClass]="{'disable_button': disable}">Visualize!</button>
+        <button class="bttn" (click)="visualize()" [disabled]="disable || !algo_selected " [ngClass]="{'disable_button': disable}">{{  buttonMsg }}</button>
          
         <div class="item" style="margin-left: auto;">
             <button class="links" (click)="clear_wall()" [disabled]="disable" [ngClass]="{'disable': disable}">Clear Wall & Weights</button>

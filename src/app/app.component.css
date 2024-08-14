@@ -3,9 +3,9 @@
     font-size: 1rem !important;
     grid-template-columns: repeat(70, 1fr);
     grid-template-rows: repeat(28, 1fr);
-    
+    grid-gap: .05rem;
     border: 1px solid rgba(0, 132, 255, 0.233);
-    background-color: rgba(255, 255, 255, 0.418);
+    background-color: rgba(0, 132, 255, 0.233);
     margin: 0px 2px;
 }
 
@@ -32,19 +32,30 @@ i {
     .grid {
         grid-template-columns: repeat(56, 1fr);
         grid-template-rows: repeat(32, 1fr);
+        grid-gap: 1px;
     }
 }
 
 @media screen and (max-width: 1025px) {
     .grid {
-        grid-template-columns: repeat(35, 1fr);
-        grid-template-rows: repeat(35, 1fr);
+        grid-template-columns: repeat(50, 1fr);
+        grid-template-rows: repeat(40, 1fr);
+        grid-gap: 1px;
     }
 }
 
-@media screen and (max-width: 695px) {
+@media screen and (max-width: 740px) {
     .grid {
-        grid-template-columns: repeat(20, 1fr);
-        grid-template-rows: repeat(34, 1fr);
+        grid-template-columns: repeat(35, 1fr);
+        grid-template-rows: repeat(35, 1fr);
+        grid-gap: 1px;
+    }
+}
+
+@media screen and (max-width: 450px) {
+    .grid {
+        grid-template-columns: repeat(25, 1fr);
+        grid-template-rows: repeat(30, 1fr);
+        grid-gap: 1px;
     }
 }

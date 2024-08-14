@@ -1,61 +1,52 @@
-*{
+* {
     padding: 0;
     margin: 0;
-    font-family: 'Poppins', sans-serif;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
-.node{
-    height: 2.7vh;
+.node {
     text-align: center;
     display: flex;
     align-items: center;
+    width: 100%;
+    height: 100%;
     justify-content: center;
     background-color: white;
-    border: rgba(0, 132, 255, 0.233) 0.1rem solid;
 }
 
-.node span{
+.node span {
     color: rgb(42, 21, 66);;
 }
 
-.icon{
-    font-size: 1.4rem !important;
+.icon {
+    font-size: 1.2rem !important;
 }
 
-.marker{
+.marker {
     background-color: rgb(173, 255, 47) !important;
 }
 
-.wall{
+.wall {
     background-color: rgb(17, 17, 17) !important;
-    border: rgb(17, 17, 17) 0.1rem solid !important;
 }
 
-.visited{
+.visited {
     background-color: rgb(0, 174, 255);
-    transition: all 0.5s ease-in;
+    transition: all 0.5s linear;
 }
 
-.boom-visited{
+.boom-visited {
     background-color: rgb(212, 0, 255);
-    transition: all 0.5s ease-in;
+    transition: all 0.5s linear;
 }
 
-.path-marker{
+.path-marker {
     background-color: rgb(29, 218, 139) !important;
 }
 
-.path{
+.path {
     background-color: rgb(245, 192, 48);
-    transition: all 1s ease-in;
-}
-
-.fill{
-  font-variation-settings:
-  'FILL' 1,
-  'wght' 400,
-  'GRAD' 0,
-  'opsz' 48
+    transition: all 1s linear;
 }
 
 .list_view {
@@ -66,55 +57,31 @@
 }  
 
 @media screen and (max-width: 1440px) {
-    html{
-        font-size: 14px;
-    }
-
-    .node{
-        height: 2.4vh;
-    }
-}
-
-@media screen and (max-width: 1680px) {
-
-    .node{
-        height: 2.2vh;
-    }
-}
-
-@media screen and (max-width: 1250px) {
-
-    .node{
-        height: 2.1vh;
-    }
-}
-
-@media screen and (max-width: 875px) {
-    .node{
-        height: 2.1vh;
-    }
-}
-
-@media screen and (max-width: 733px) {
-    html{
+    html {
         font-size: 13px;
     }
 }
 
-@media screen and (max-width: 695px) {
-    html{
+@media screen and (max-width: 733px) {
+    html {
         font-size: 12px;
     }
 }
 
-@media screen and (max-width:341px) {
-    html{
+@media screen and (max-width: 695px) {
+    html {
         font-size: 11px;
     }
 }
 
+@media screen and (max-width:341px) {
+    html {
+        font-size: 10px;
+    }
+}
+
 @media screen and (max-width:311px) {
-    html{
+    html {
         font-size: 10px;
     }
 }
