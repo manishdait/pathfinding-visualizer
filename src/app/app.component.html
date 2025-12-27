@@ -9,12 +9,23 @@
     @for (row of rows; track $index; let i = $index) {
       <tr>
         @for (col of cols; track $index; let j = $index) {
-          <td class="w-[1.8rem] h-[1.8rem] border-[.1em] border-blue-300 text-center" [attr.id]="[i, j]" [attr.weight]="1" [attr.row]="i" [attr.col]="j" (dragover)="onDragOver($event)" (drop)="onDrop($event, i, j)" (click)="onClick(i, j)">
+          <td #node class="w-[1.8rem] h-[1.8rem] border-[.1em] border-blue-300 text-center" [attr.id]="[i, j]" [attr.weight]="1" [attr.row]="i" [attr.col]="j" (dragover)="onDragOver($event)" (drop)="onDrop($event, i, j)" (click)="onClick($event, i, j)">
             @if (isSource(i, j)) {
-              <div draggable="true" (dragstart)="onDragStart($event)">
+              <div draggable="true" (dragstart)="onDragStart($event, 'source')">
                 <fa-icon class="text-base text-gray-900" [icon]="'star-of-life'"/>
               </div>
             }
+
+            @if (isTarget(i, j)) {
+              <div draggable="true" (dragstart)="onDragStart($event, 'target')">
+                <fa-icon class="text-base text-gray-900" [icon]="'flag-checkered'"/>
+              </div>
+            }
+
+            @if (node.classList.contains('weight')) {
+              <fa-icon class="text-base text-gray-900" [icon]="'weight-hanging'"/>
+            }
+
           </td>
         }
       </tr>

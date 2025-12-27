@@ -3,6 +3,21 @@
   border-color: #101828 !important;
 }
 
+.visited {
+  background-color: #8ec5ff !important;
+  border-color: #8ec5ff !important;
+}
+
+.marker {
+  border-color: rgb(58, 255, 74) !important;
+  background-color: rgb(58, 255, 58) !important;
+}
+
+.path {
+  background-color: #ffd230 !important;
+  border-color: #ffd230 !important;
+}
+
 @media screen and (max-width: 950px) {
   .info-banner {
     display: none;

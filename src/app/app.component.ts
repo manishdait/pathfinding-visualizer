@@ -2,8 +2,9 @@ import { AfterViewInit, Component, HostListener, inject, OnInit } from '@angular
 import { FaIconLibrary, FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { NavbarComponent } from './navbar/navbar.component';
 import { fontawsomeIcons } from './fa-icons';
-import { mapGrid } from './grid';
 import { InfoBannerComponent } from './info-banner/info-banner.component';
+import { bfs } from './utils/algorithm/bfs';
+import { mapGrid } from './utils/utils';
 
 @Component({
   selector: 'app-root',
@@ -18,9 +19,12 @@ export class AppComponent implements OnInit, AfterViewInit {
   cols = Array(60);
 
   source = [15, 6];
-  target = [];
+  target = [15, 40];
 
   wallPressed = false;
+  graph: {[key:string]: string[]} = {};
+  
+  dragIcon: string | null = null;
 
   constructor() {}
 
@@ -64,14 +68,19 @@ export class AppComponent implements OnInit, AfterViewInit {
   }
   
   ngAfterViewInit(): void {
-    console.log(mapGrid(30, 60));
+    this.graph = mapGrid(30, 60);
   }
 
   isSource(row: number, col: number) {
     return row == this.source[0] && col == this.source[1];
   }
 
-  onDragStart(event: DragEvent) {
+  isTarget(row: number, col: number) {
+    return row == this.target[0] && col == this.target[1];
+  }
+
+  onDragStart(event: DragEvent, icon: string) {
+    this.dragIcon = icon;
     if (event.dataTransfer) {
       event.dataTransfer.effectAllowed = 'move';
     }
@@ -83,16 +92,36 @@ export class AppComponent implements OnInit, AfterViewInit {
 
   onDrop(event: DragEvent, i: number, j: number) {
     event.preventDefault();
-    this.source[0] = i;
-    this.source[1] = j;
+
+    if (this.dragIcon === 'source') {
+      this.source[0] = i;
+      this.source[1] = j;
+    } else if (this.dragIcon === 'target') {
+      this.target[0] = i;
+      this.target[1] = j;
+    }
   }
 
-  onClick(i: number, j: number) {
+  onClick(event: MouseEvent, i: number, j: number) {
     const node = document.getElementById(`${i},${j}`);
-    if (node?.classList.contains('wall')) {
-      node.classList.remove('wall');
-    } else if (!this.wallPressed) {
-      node?.classList.add('wall')
+    if (event.shiftKey) {
+      if (node?.classList.contains('weight')) {
+        node.setAttribute('weight', '1');
+        node.classList.remove('weight');
+      } else {
+        node?.setAttribute('weight', '15');
+        node?.classList.add('weight');
+      }
+    } else {
+      if (node?.classList.contains('wall')) {
+        node.classList.remove('wall');
+      } else {
+        node?.classList.add('wall')
+      }
     }
+  }
+
+  bfs() {
+    bfs(this.graph!, `${this.source[0]},${this.source[1]}`, `${this.target[0]},${this.target[1]}`);
   }
 }
