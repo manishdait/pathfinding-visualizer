@@ -7,7 +7,7 @@
   @if (toggle()) {
     <ul class="w-[max(100%,10rem)] absolute z-10 bg-gray-900 mt-1 rounded-md overflow-hidden shadow-sm">
       @for (option of options(); track option) {
-        <li class="text-base p-2 hover:bg-gray-700 cursor-pointer" (click)="setValue(option)">{{ option }}</li>
+        <li class="text-base p-2 hover:bg-gray-700 cursor-pointer" (click)="onSelect(option)">{{ option }}</li>
       }
     </ul>
   }

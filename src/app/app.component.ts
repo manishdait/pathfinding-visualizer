@@ -1,10 +1,15 @@
-import { AfterViewInit, Component, HostListener, inject, OnInit } from '@angular/core';
+import { Component, HostListener, inject, OnInit, signal } from '@angular/core';
 import { FaIconLibrary, FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { NavbarComponent } from './navbar/navbar.component';
-import { fontawsomeIcons } from './fa-icons';
-import { InfoBannerComponent } from './info-banner/info-banner.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { fontawsomeIcons } from './utils/fa-icons';
+
+import { InfoBannerComponent } from './components/info-banner/info-banner.component';
 import { bfs } from './utils/algorithm/bfs';
 import { mapGrid } from './utils/utils';
+import { Algorithm } from './utils/algorithm/algorithm';
+import { Cell, GRID_CONFIGS, Point } from './utils/grid-utils';
+
+type DragType = 'source' | 'target' | 'hop' | null;
 
 @Component({
   selector: 'app-root',
@@ -12,63 +17,108 @@ import { mapGrid } from './utils/utils';
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
-export class AppComponent implements OnInit, AfterViewInit {
+export class AppComponent implements OnInit {
   faLibray = inject(FaIconLibrary);
-
-  rows = Array(30);
-  cols = Array(60);
-
-  source = [15, 6];
-  target = [15, 40];
-
-  wallPressed = false;
   graph: {[key:string]: string[]} = {};
-  
-  dragIcon: string | null = null;
+
+  // Grid
+  grid: Cell[][] = [];
+
+  rows!: number[];
+  cols!: number[];
+
+  // Nodes
+  source: Point = [15, 6];
+  target: Point = [15, 40];
+  hop: Point = [3, 25];
+
+  hasHop = signal(false);
+
+  dragIcon: DragType = null;
 
   constructor() {}
 
   ngOnInit(): void {
     this.faLibray.addIcons(...fontawsomeIcons);
-    const window_width = window.innerWidth;
-    if(window_width <= 1440 && window_width > 1250) {
-      this.rows = Array(30);
-      this.cols = Array(45);
+    this.configureGrid(window.innerWidth);
+  }
 
-      this.source = [10,5];
-    }
+  // Resize Listener
+  @HostListener('window:resize')
+  onResize() {
+    this.configureGrid(window.innerWidth);
+  }
 
-    if(window_width <= 1250 && window_width > 1025) {
-      this.rows = Array(30);
-      this.cols = Array(35);
+  // Grid
+  private configureGrid(width: number): void {
+    const config = GRID_CONFIGS.find(c => width <= c.maxWidth)!;
 
-      this.source = [10,5];
-    }
+    this.rows = Array(config.rows);
+    this.cols = Array(config.cols);
 
-    if(window_width <= 1025 && window_width > 740) {
-      this.rows = Array(30);
-      this.cols = Array(20);
+    this.source = config.source;
+    this.target = config.target;
 
-      this.source = [6,5];
-    }
+    this.initGrid();
+    this.graph = mapGrid(this.rows.length, this.cols.length);
+  }
 
-    if(window_width <= 740 && window_width > 450) {
-      this.rows = Array(30);
-      this.cols = Array(15);
+  private initGrid() {
+    this.grid = Array.from({ length: this.rows.length }, () =>
+      Array.from({ length: this.cols.length }, () => ({
+        wall: false,
+        weight: 1
+      }))
+    );
+  }
 
-      this.source = [6,5];
-    }
+  // Drah Drop
+  onDragStart(event: DragEvent, type: DragType) {
+    this.dragIcon = type;
 
-    if(window_width <= 450 && window_width > 200) {
-      this.rows = Array(30);
-      this.cols = Array(12);
-
-      this.source = [6,5];
+    if (event.dataTransfer) {
+      event.dataTransfer.effectAllowed = 'move';
     }
   }
-  
-  ngAfterViewInit(): void {
-    this.graph = mapGrid(30, 60);
+
+  onDragOver(event: DragEvent) {
+    event.preventDefault();
+  }
+
+  onDrop(event: DragEvent, row: number, col: number) {
+    event.preventDefault();
+
+    const point: Point = [row, col];
+
+    switch (this.dragIcon) {
+      case 'source':
+        this.source = point;
+        break;
+      case 'target':
+        this.target = point;
+        break;
+      case 'hop':
+        this.hop = point;
+        break;
+      default:
+        console.error("Invalid drag type provided");
+    }
+
+    this.dragIcon = null;
+  }
+
+  onClick(event: MouseEvent, row: number, col: number) {
+    const node = this.grid[row][col];
+
+    if (event.shiftKey) {
+      node.weight = node.weight === 15? 1 : 15;
+    } else {
+      node.wall = !node.wall;
+    }
+  }
+
+  addHop() {
+    this.hasHop.update(toggle => !toggle);
   }
 
   isSource(row: number, col: number) {
@@ -79,49 +129,22 @@ export class AppComponent implements OnInit, AfterViewInit {
     return row == this.target[0] && col == this.target[1];
   }
 
-  onDragStart(event: DragEvent, icon: string) {
-    this.dragIcon = icon;
-    if (event.dataTransfer) {
-      event.dataTransfer.effectAllowed = 'move';
+  isHop(row: number, col: number) {
+    if (this.hasHop()) {
+      return row == this.hop[0] && col == this.hop[1];
     }
+    
+    return false;
   }
 
-  onDragOver(event: DragEvent) {
-    event.preventDefault();
-  }
+  visualize(algo: Algorithm) {
+    switch (algo) {
+      case Algorithm.BREATH_FIRST_SEARCH:
+        bfs(this.graph!, `${this.source[0]},${this.source[1]}`, `${this.target[0]},${this.target[1]}`, `${this.hop[0]},${this.hop[1]}`, this.hasHop());
+        break;
 
-  onDrop(event: DragEvent, i: number, j: number) {
-    event.preventDefault();
-
-    if (this.dragIcon === 'source') {
-      this.source[0] = i;
-      this.source[1] = j;
-    } else if (this.dragIcon === 'target') {
-      this.target[0] = i;
-      this.target[1] = j;
+      default:
+        console.error('Invalid algorithm type provided');
     }
-  }
-
-  onClick(event: MouseEvent, i: number, j: number) {
-    const node = document.getElementById(`${i},${j}`);
-    if (event.shiftKey) {
-      if (node?.classList.contains('weight')) {
-        node.setAttribute('weight', '1');
-        node.classList.remove('weight');
-      } else {
-        node?.setAttribute('weight', '15');
-        node?.classList.add('weight');
-      }
-    } else {
-      if (node?.classList.contains('wall')) {
-        node.classList.remove('wall');
-      } else {
-        node?.classList.add('wall')
-      }
-    }
-  }
-
-  bfs() {
-    bfs(this.graph!, `${this.source[0]},${this.source[1]}`, `${this.target[0]},${this.target[1]}`);
   }
 }

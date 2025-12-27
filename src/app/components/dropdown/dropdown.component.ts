@@ -1,4 +1,4 @@
-import { Component, input, OnInit, signal } from '@angular/core';
+import { Component, input, OnInit, output, signal } from '@angular/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @Component({
@@ -8,6 +8,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
   styleUrl: './dropdown.component.css'
 })
 export class DropdownComponent implements OnInit {
+  select = output<string>();
+
   placeholder = input.required<string>();
   options = input.required<string[]>();
 
@@ -24,8 +26,9 @@ export class DropdownComponent implements OnInit {
     this.toggle.update(toggle => !toggle);
   }
 
-  setValue(value: string) {
+  onSelect(value: string) {
     this.value.set(value);
     this.toggleOptions();
+    this.select.emit(value);
   }
 }

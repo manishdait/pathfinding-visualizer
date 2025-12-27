@@ -3,9 +3,14 @@
   border-color: #101828 !important;
 }
 
-.visited {
+.visited_b {
   background-color: #8ec5ff !important;
   border-color: #8ec5ff !important;
+}
+
+.visited_a {
+  background-color: #c27aff !important;
+  border-color: #c27aff !important;
 }
 
 .marker {

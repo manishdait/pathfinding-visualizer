@@ -1,28 +1,47 @@
 <app-navbar/>
 
-<div class="info-banner"><app-info-banner/></div>
+<div class="info-banner">
+  <app-info-banner/>
+</div>
 
 <!-- <h1 class="text-base text-gray-900 font-semibold w-full text-center p-4">Pick an <strong><i>Algorithm</i></strong> to Visualize!</h1> -->
 
 <div class="w-screen flex items-center justify-center p-4">
   <table class="border-collapse">
-    @for (row of rows; track $index; let i = $index) {
+    @for (row of grid; track $index; let i = $index) {
       <tr>
-        @for (col of cols; track $index; let j = $index) {
-          <td #node class="w-[1.8rem] h-[1.8rem] border-[.1em] border-blue-300 text-center" [attr.id]="[i, j]" [attr.weight]="1" [attr.row]="i" [attr.col]="j" (dragover)="onDragOver($event)" (drop)="onDrop($event, i, j)" (click)="onClick($event, i, j)">
+        @for (col of row; track $index; let j = $index) {
+          <td
+            class="w-[1.8rem] h-[1.8rem] border-[.1em] border-blue-300 text-center node" 
+            [class.wall]="col.wall"
+            [class.weight]="col.weight > 1"
+            [attr.id]="[i, j]"
+            [attr.weight]="col.weight" 
+            [attr.row]="i" 
+            [attr.col]="j" 
+            (dragover)="onDragOver($event)" 
+            (drop)="onDrop($event, i, j)" 
+            (click)="onClick($event, i, j)"
+          >
             @if (isSource(i, j)) {
               <div draggable="true" (dragstart)="onDragStart($event, 'source')">
                 <fa-icon class="text-base text-gray-900" [icon]="'star-of-life'"/>
               </div>
             }
 
-            @if (isTarget(i, j)) {
+            @else if (isTarget(i, j)) {
               <div draggable="true" (dragstart)="onDragStart($event, 'target')">
                 <fa-icon class="text-base text-gray-900" [icon]="'flag-checkered'"/>
               </div>
             }
 
-            @if (node.classList.contains('weight')) {
+            @else if (isHop(i, j)) {
+              <div draggable="true" (dragstart)="onDragStart($event, 'hop')">
+                <fa-icon class="text-base text-gray-900" [icon]="'location-crosshairs'"/>
+              </div>
+            }
+
+            @else if (col.weight > 1) {
               <fa-icon class="text-base text-gray-900" [icon]="'weight-hanging'"/>
             }
 
