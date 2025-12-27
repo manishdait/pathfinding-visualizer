@@ -1,13 +1,23 @@
-<app-tutorial></app-tutorial>
+<app-navbar/>
 
-<app-navbar></app-navbar>
+<div class="info-banner"><app-info-banner/></div>
 
-<app-info-tab></app-info-tab>
+<!-- <h1 class="text-base text-gray-900 font-semibold w-full text-center p-4">Pick an <strong><i>Algorithm</i></strong> to Visualize!</h1> -->
 
-<app-banner></app-banner>
-
-<div>
-  <div class="grid" id="grid">
-    <app-node class="node-con" (dragover)="allow_image_drop($event)" (drop)="image_drop($event)" #Appnode appCreateWallWeight *appMapMaze="row; col:col; let i = appMapMazeId; let c = appFillMazeCount" [attr.rc]="i" [id]="i" [isWeight]="is_weight" [isWall]="is_wall" [isDisable]="disable" [attr.count]="c" [attr.weight]="1"></app-node>
-  </div>
+<div class="w-screen flex items-center justify-center p-4">
+  <table class="border-collapse">
+    @for (row of rows; track $index; let i = $index) {
+      <tr>
+        @for (col of cols; track $index; let j = $index) {
+          <td class="w-[1.8rem] h-[1.8rem] border-[.1em] border-blue-300 text-center" [attr.id]="[i, j]" [attr.weight]="1" [attr.row]="i" [attr.col]="j" (dragover)="onDragOver($event)" (drop)="onDrop($event, i, j)" (click)="onClick(i, j)">
+            @if (isSource(i, j)) {
+              <div draggable="true" (dragstart)="onDragStart($event)">
+                <fa-icon class="text-base text-gray-900" [icon]="'star-of-life'"/>
+              </div>
+            }
+          </td>
+        }
+      </tr>
+    }
+  </table>
 </div>

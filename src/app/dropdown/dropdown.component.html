@@ -1,0 +1,14 @@
+<div class="relative">
+  <div class="flex items-center justify-between gap-4 cursor-pointer bg-gray-700 rounded-md p-2" (click)="toggleOptions()">
+    <span class="block text-base font-medium">{{ value() }}</span>
+    <fa-icon class="text-sm pt-1 transition" [class]="{'rotate-180': toggle()}"  [icon]="'angle-down'"/>
+  </div>
+
+  @if (toggle()) {
+    <ul class="w-[max(100%,10rem)] absolute z-10 bg-gray-900 mt-1 rounded-md overflow-hidden shadow-sm">
+      @for (option of options(); track option) {
+        <li class="text-base p-2 hover:bg-gray-700 cursor-pointer" (click)="setValue(option)">{{ option }}</li>
+      }
+    </ul>
+  }
+</div>

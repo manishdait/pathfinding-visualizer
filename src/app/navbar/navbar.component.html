@@ -1,0 +1,35 @@
+<div class="flex items-center gap-8 bg-gray-900 text-white p-4 navbar">
+  <h1 class="text-2xl font-semibold">Pathfinding Visualizer</h1>
+
+  <div class="flex grow items-center justify-between gap-8 nav-menu">
+    <div class="flex gap-4">
+      <app-dropdown [placeholder]="'Algorithm'" [options]="algorithms"/>
+      <app-dropdown [placeholder]="'Maze'" [options]="mazes"/>
+
+      <button class="text-base font-medium p-2 rounded-md cursor-pointer hover:bg-gray-700" type="button">Add Hop</button>
+      <button class="bg-amber-500 text-base font-medium p-2 rounded-md cursor-pointer hover:bg-amber-600" type="button">Visualize !</button>
+    </div>
+
+    <div>
+      <button class="text-base font-medium p-2 rounded-md cursor-pointer hover:bg-gray-700" type="button">Clear Wall & Weight</button>
+      <button class="text-base font-medium p-2 rounded-md cursor-pointer hover:bg-gray-700" type="button">Clear Path</button>
+      <button class="text-base font-medium p-2 rounded-md cursor-pointer hover:bg-gray-700" type="button">Clear Board</button>
+    </div>
+  </div>
+
+  <button class="text-base w-8 h-8 flex items-center rounded-md justify-center cursor-pointer bg-gray-700 responsive-menu" (click)="toggleMenu()">
+    <fa-icon [icon]="menuList()? 'close':'bars'"/>
+  </button>
+
+  @if (menuList()) {
+    <div class="w-[min(100%,20rem)] absolute flex gap-2 items-start bg-gray-900 flex-col px-4 py-8 top-18 right-2 rounded-md responsive-menu">
+      <app-dropdown class="w-full" [placeholder]="'Algorithm'" [options]="algorithms"/>
+      <app-dropdown class="w-full" [placeholder]="'Maze'" [options]="mazes"/>
+      <button class="w-full text-left text-base font-medium p-2 rounded-md cursor-pointer hover:bg-gray-700" type="button">Add Hop</button>
+      <button class="w-full text-left text-base font-medium p-2 rounded-md cursor-pointer hover:bg-gray-700" type="button">Clear Wall & Weight</button>
+      <button class="w-full text-left text-base font-medium p-2 rounded-md cursor-pointer hover:bg-gray-700" type="button">Clear Path</button>
+      <button class="w-full text-left text-base font-medium p-2 rounded-md cursor-pointer hover:bg-gray-700" type="button">Clear Board</button>
+      <button class="w-full bg-amber-500 text-base font-medium p-2 rounded-md cursor-pointer hover:bg-amber-600" type="button">Visualize !</button>
+    </div>
+  }
+</div>

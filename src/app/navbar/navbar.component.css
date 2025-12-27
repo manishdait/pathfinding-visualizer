@@ -1,0 +1,17 @@
+.responsive-menu {
+  display: none;
+}
+
+@media screen and (max-width: 1000px) {
+  .navbar {
+    justify-content: space-between;
+  }
+
+  .nav-menu {
+    display: none;
+  }
+
+  .responsive-menu {
+    display: flex;
+  }
+}
