@@ -55,7 +55,7 @@ Then, open your browser and navigate to `http://localhost:4200/`.
 
 ## Demo
 
-![Pathfinding Visualizer Demo](src/assets/image/action.gif)
+![Pathfinding Visualizer Demo](public/assets/action.gif)
 
 [Check out the deploy website here](https://manishdait.github.io/pathfinding-visualizer/)
 
