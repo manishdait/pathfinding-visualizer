@@ -57,7 +57,7 @@ Then, open your browser and navigate to `http://localhost:4200/`.
 
 ![Pathfinding Visualizer Demo](public/assets/action.gif)
 
-[Check out the deploy website here](https://manishdait.github.io/pathfinding-visualizer/)
+[Check out the deploy website here](https://pathfinding-visualizer-oedh.vercel.app/)
 
 ## License
 
