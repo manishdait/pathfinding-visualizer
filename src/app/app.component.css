@@ -1,3 +1,9 @@
+.node {
+  transition:
+    background-color 0.5s ease,
+    border-color 0.5s ease;
+}
+
 .wall {
   background-color: #101828 !important;
   border-color: #101828 !important;
@@ -5,22 +11,26 @@
 
 .visited_b {
   background-color: #8ec5ff !important;
-  border-color: #8ec5ff !important;
+  border-color: #ffffff !important;
 }
 
 .visited_a {
   background-color: #c27aff !important;
-  border-color: #c27aff !important;
+  border-color: #ffffff !important;
 }
 
 .marker {
+  transition: none !important;
+  background-color: rgb(58, 255, 74) !important;
   border-color: rgb(58, 255, 74) !important;
-  background-color: rgb(58, 255, 58) !important;
 }
 
 .path {
   background-color: #ffd230 !important;
   border-color: #ffd230 !important;
+  transition:
+    background-color 0.5s ease,
+    border-color 0.5s ease;
 }
 
 @media screen and (max-width: 950px) {

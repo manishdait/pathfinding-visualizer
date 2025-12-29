@@ -24,19 +24,19 @@
             (click)="onClick($event, i, j)"
           >
             @if (isSource(i, j)) {
-              <div draggable="true" (dragstart)="onDragStart($event, 'source')">
+              <div [draggable]="!disabled" (dragstart)="onDragStart($event, 'source')">
                 <fa-icon class="text-base text-gray-900" [icon]="'star-of-life'"/>
               </div>
             }
 
             @else if (isTarget(i, j)) {
-              <div draggable="true" (dragstart)="onDragStart($event, 'target')">
+              <div [draggable]="!disabled" (dragstart)="onDragStart($event, 'target')">
                 <fa-icon class="text-base text-gray-900" [icon]="'flag-checkered'"/>
               </div>
             }
 
             @else if (isHop(i, j)) {
-              <div draggable="true" (dragstart)="onDragStart($event, 'hop')">
+              <div [draggable]="!disabled" (dragstart)="onDragStart($event, 'hop')">
                 <fa-icon class="text-base text-gray-900" [icon]="'location-crosshairs'"/>
               </div>
             }

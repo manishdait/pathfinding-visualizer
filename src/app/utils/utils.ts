@@ -3,7 +3,6 @@ export async function wait(delay:number){
    await timer(delay);
 }
 
-
 export function mapGrid(rowEnd: number, colEnd: number): {[key: string]:string[]} {
   const graph: {[key: string]:string[]} = {};
   

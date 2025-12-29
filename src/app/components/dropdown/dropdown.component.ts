@@ -1,5 +1,6 @@
-import { Component, input, OnInit, output, signal } from '@angular/core';
+import { Component, inject, input, OnInit, output, signal } from '@angular/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { AppComponent } from '../../app.component';
 
 @Component({
   selector: 'app-dropdown',
@@ -8,6 +9,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
   styleUrl: './dropdown.component.css'
 })
 export class DropdownComponent implements OnInit {
+  appComponent = inject(AppComponent);
+
   select = output<string>();
 
   placeholder = input.required<string>();
@@ -23,6 +26,7 @@ export class DropdownComponent implements OnInit {
   }
 
   toggleOptions() {
+    if (this.appComponent.disabled) return;
     this.toggle.update(toggle => !toggle);
   }
 

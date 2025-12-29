@@ -1,6 +1,6 @@
 import { wait } from "../utils";
 
-export function resolvePath(dict: {[key: string]: string | null}, target: string): string[] {
+export function resolvePath(dict: Record<string, string | null>, target: string): string[] {
   const path = [];
   path.push(target);
 
