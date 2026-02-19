@@ -3,8 +3,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 import { DropdownComponent } from '../dropdown/dropdown.component';
 import { AppComponent } from '../../app.component';
-import { MAZES } from '../../utils/constant';
 import { Algorithm } from '../../utils/algorithm/algorithm';
+import { Maze } from '../../utils/maze/maze';
 
 @Component({
   selector: 'app-navbar',
@@ -18,7 +18,7 @@ export class NavbarComponent {
   menuList = signal<boolean>(false);
 
   algorithms: string[] = Object.values(Algorithm);
-  mazes: string[] = MAZES;
+  mazes: string[] = Object.values(Maze);
 
   selected_algorithm = signal<Algorithm | null>(null);
   
@@ -35,6 +35,13 @@ export class NavbarComponent {
 
     this.selected_algorithm.set(algorithm as Algorithm);
     this.appComponent.algorithm = this.selected_algorithm()!;
+  }
+
+  onMazeSelect(maze: string) {
+    if (this.appComponent.disabled) return;
+    if ((maze as Maze) === Maze.WEIGHTED_MAZE && !this.weighted()) return;
+    
+    this.appComponent.generateMaze(maze as Maze);
   }
 
   visualize() {
@@ -62,5 +69,9 @@ export class NavbarComponent {
 
   clearBoard() {
     this.appComponent.clearBoard();
+  }
+
+  weighted() {
+    return this.appComponent._weightedAlgo()
   }
 }

@@ -4,7 +4,7 @@
   <div class="flex grow items-center justify-between gap-8 nav-menu">
     <div class="flex gap-4">
       <app-dropdown [placeholder]="'Algorithm'" [options]="algorithms" (select)="onAlgoSelect($event)"/>
-      <app-dropdown [placeholder]="'Maze'" [options]="mazes"/>
+      <app-dropdown [placeholder]="'Maze'" [options]="mazes" (select)="onMazeSelect($event)"/>
 
       <button class="text-base font-medium p-2 rounded-md cursor-pointer hover:bg-gray-700 disabled:hover:bg-gray-900" [disabled]="disabled()" type="button" (click)="addHop()">Add Hop</button>
       <button class="bg-amber-500 text-base font-medium p-2 rounded-md cursor-pointer hover:bg-amber-600 disabled:bg-gray-500" [disabled]="disabled()" type="button" (click)="visualize()">Visualize !</button>

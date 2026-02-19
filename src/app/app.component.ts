@@ -12,6 +12,9 @@ import { dfs } from './utils/algorithm/dfs';
 import { dijkstra } from './utils/algorithm/dijktras';
 import { astar } from './utils/algorithm/astar';
 import { bidirectional } from './utils/algorithm/bidirectional';
+import { Maze } from './utils/maze/maze';
+import { generateRecursiveMaze } from './utils/maze/recursive-division';
+import { generateRandomizedMaze } from './utils/maze/random-maze';
 
 type DragType = 'source' | 'target' | 'hop' | null;
 
@@ -235,5 +238,32 @@ export class AppComponent implements OnInit {
 
       this._disabled.set(false);
     }
+  }
+
+  async generateMaze(maze: Maze) {
+    if (this._disabled()) return;
+    this.clearWall();
+
+    switch (maze) {
+      case Maze.RANDOM_MAZE:
+        await generateRandomizedMaze(this.grid, this.source, this.target, this.hasHop()? this.hop : null);
+        break;
+      case Maze.WEIGHTED_MAZE:
+        if (!this._weightedAlgo()) return;
+        await generateRandomizedMaze(this.grid, this.source, this.target, this.hasHop()? this.hop : null, true);
+        break;
+      case Maze.RECURSIVE_DIVISION:
+        await generateRecursiveMaze(this.grid, this.source, this.target, this.hasHop()? this.hop : null);
+        break;
+      default:
+        console.error('Invalis algorithm type provided');
+    }
+  }
+
+  _weightedAlgo() {
+    const algorithm = this._algorithm();
+    
+    return algorithm !== null && 
+      (algorithm === Algorithm.DIJKTRAS || algorithm == Algorithm.ASTAR);
   }
 }
