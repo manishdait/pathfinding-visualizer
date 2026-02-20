@@ -52,7 +52,7 @@ export async function generateRecursiveMaze(grid: Cell[][], source: Point, targe
     }
 }
 
-  await divide(1, rows - 2, 1, cols - 1, chooseOrientation(cols - 1, rows - 1));
+  await divide(1, rows - 1, 1, cols - 1, chooseOrientation(cols - 1, rows - 1));
   
   grid[source[0]][source[1]].wall = false;
   grid[target[0]][target[1]].wall = false;
